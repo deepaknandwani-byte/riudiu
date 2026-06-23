@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Italianno&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Italianno&family=Great+Vibes&family=Pinyon+Script&family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
   /* ============================================================
@@ -517,7 +517,7 @@
   }
 
   /* ============================================================
-     VARMALA CEREMONY GAME
+     VARMALA CEREMONY GAME — retro 8-bit Chrome-dino style
      ============================================================ */
   .varmala-stage {
     position: relative;
@@ -525,148 +525,258 @@
     width: 100%;
     margin: 36px auto 0;
     aspect-ratio: 3 / 2;
-    background: linear-gradient(180deg, rgba(74, 40, 109, 0.55) 0%, rgba(20, 8, 42, 0.85) 100%);
-    border: 1.5px solid var(--gold-bright);
-    box-shadow: inset 0 0 0 4px rgba(20, 8, 42, 0.7), inset 0 0 0 4.5px var(--gold), var(--shadow-card);
-    border-radius: 4px;
+    background: #fef3d6;
+    border: 4px solid #2a1043;
+    border-radius: 6px;
+    box-shadow:
+      inset 0 0 0 4px #fef3d6,
+      inset 0 0 0 8px #d4a017,
+      6px 6px 0 #2a1043,
+      0 12px 32px rgba(20, 8, 42, 0.55);
     overflow: hidden;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    color: #2a1043;
   }
-  /* mandap arch — subtle decorative top */
-  .varmala-stage::before {
-    content: '';
+  .varmala-stage svg { shape-rendering: crispEdges; }
+  .varmala-stage * { image-rendering: pixelated; }
+
+  /* score bar — top of screen */
+  .score-bar {
     position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse 80% 30% at 50% -5%, rgba(216, 160, 23, 0.25) 0%, transparent 60%),
-      radial-gradient(1.5px 1px at 18% 24%, rgba(245, 211, 110, 0.6), transparent 51%),
-      radial-gradient(1.2px 1px at 82% 28%, rgba(245, 211, 110, 0.5), transparent 51%),
-      radial-gradient(1.8px 1.2px at 50% 14%, rgba(245, 211, 110, 0.7), transparent 51%),
-      radial-gradient(1.2px 1px at 32% 18%, rgba(245, 211, 110, 0.4), transparent 51%),
-      radial-gradient(1.2px 1px at 68% 20%, rgba(245, 211, 110, 0.4), transparent 51%);
-    pointer-events: none;
+    top: 14px; left: 18px; right: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #2a1043;
+    z-index: 5;
   }
-  /* floor line */
-  .varmala-stage::after {
-    content: '';
-    position: absolute;
-    left: 6%; right: 6%; bottom: 5%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    opacity: 0.5;
+  .score-bar .hi { color: #2a1043; opacity: 0.75; }
+  .score-bar .blink {
+    animation: pxBlink 0.6s steps(2) infinite;
+    display: inline-block;
+  }
+  @keyframes pxBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
   }
 
-  .character {
+  /* chunky pixel clouds (3 stacked rects per cloud) */
+  .px-cloud {
     position: absolute;
-    bottom: 6%;
-    width: 38%;
-    height: 88%;
+    z-index: 1;
+    opacity: 0.75;
   }
-  .character.dulha  { left: 5%; }
-  .character.dulhan { right: 5%; }
-  .character > svg.figure { width: 100%; height: 100%; display: block; }
+  .px-cloud svg { width: 100%; height: 100%; display: block; }
+  .px-cloud.cloud-1 { top: 16%; left: 12%; width: 32px; height: 12px; }
+  .px-cloud.cloud-2 { top: 24%; right: 14%; width: 28px; height: 10px; transform: scaleX(-1); }
+  .px-cloud.cloud-3 { top: 12%; left: 46%; width: 24px; height: 8px; }
 
-  .garland {
+  /* dashed ground line (Chrome-dino style) */
+  .ground-line {
     position: absolute;
-    width: 70%;
-    left: 15%;
-    top: 36%;
-    pointer-events: none;
-    transform-origin: 50% 50%;
-    z-index: 3;
-  }
-  .garland.worn {
-    width: 78%;
-    left: 11%;
-    top: 26%;
-    opacity: 0;
-    transition: opacity 0.5s ease 1.2s;
+    left: 4%; right: 4%;
+    bottom: 22%;
+    height: 4px;
+    background-image: linear-gradient(to right, #2a1043 0 6px, transparent 6px 10px);
+    background-size: 10px 100%;
+    background-repeat: repeat-x;
     z-index: 1;
   }
+  .ground-line::after {
+    content: '';
+    position: absolute;
+    top: 6px; left: 0; right: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, transparent 0 5px, #2a1043 5px 7px, transparent 7px 18px);
+    background-size: 18px 100%;
+  }
 
-  .ceremony-starting .character.dulha .garland.held {
-    animation: flyToDulhan 1.5s cubic-bezier(.35, .2, .4, .9) forwards;
+  /* character sprites */
+  .character {
+    position: absolute;
+    bottom: 24%;
+    width: 56px;
+    height: 80px;
+    z-index: 3;
   }
-  .ceremony-starting .character.dulhan .garland.held {
-    animation: flyToDulha 1.5s cubic-bezier(.35, .2, .4, .9) forwards;
+  @media (min-width: 480px) {
+    .character { width: 70px; height: 100px; }
   }
-  @keyframes flyToDulhan {
-    0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-    50%  { transform: translate(60%, -85%) rotate(180deg); opacity: 1; }
-    100% { transform: translate(125%, -10%) rotate(360deg) scale(0.85); opacity: 0; }
-  }
-  @keyframes flyToDulha {
-    0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-    50%  { transform: translate(-60%, -85%) rotate(-180deg); opacity: 1; }
-    100% { transform: translate(-125%, -10%) rotate(-360deg) scale(0.85); opacity: 0; }
-  }
-  .ceremony-done .garland.held { display: none; }
-  .ceremony-done .garland.worn { opacity: 1; }
+  .character.dulha  { left: 12%; }
+  .character.dulhan { right: 12%; }
+  .character > svg.sprite { width: 100%; height: 100%; display: block; }
 
-  /* falling petals on celebration */
+  /* walking — characters move toward center in stepped fashion + bob up/down */
+  .ceremony-starting .character.dulha {
+    animation: walkR 1.2s steps(10) forwards;
+  }
+  .ceremony-starting .character.dulhan {
+    animation: walkL 1.2s steps(10) forwards;
+  }
+  @keyframes walkR {
+    from { left: 12%; }
+    to   { left: 32%; }
+  }
+  @keyframes walkL {
+    from { right: 12%; }
+    to   { right: 32%; }
+  }
+  .ceremony-starting .character > svg.sprite {
+    animation: pxBob 0.25s steps(2) 5;
+  }
+  @keyframes pxBob {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-3px); }
+  }
+
+  /* held + worn garlands (pixel) */
+  .garland-pixel {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .garland-pixel.held {
+    width: 22px; height: 14px;
+    top: 50%;
+  }
+  .character.dulha  .garland-pixel.held { right: -6px; }
+  .character.dulhan .garland-pixel.held { left: -6px; }
+  .garland-pixel.worn {
+    width: 30px; height: 12px;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease 1.4s;
+  }
+  .ceremony-done .garland-pixel.held { opacity: 0; transition: opacity 0.2s; }
+  .ceremony-done .garland-pixel.worn { opacity: 1; }
+
+  /* "READY?" blink prompt before start */
+  .ready-prompt {
+    position: absolute;
+    bottom: 32%; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: #2a1043;
+    text-transform: uppercase;
+    animation: pxBlink 0.8s steps(2) infinite;
+    z-index: 5;
+  }
+  .ceremony-starting .ready-prompt,
+  .ceremony-done .ready-prompt { display: none; }
+
+  /* big celebration banner */
+  .game-banner {
+    position: absolute;
+    top: 36%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    color: #2a1043;
+    background: #fef3d6;
+    padding: 10px 14px;
+    border: 3px solid #2a1043;
+    box-shadow: 5px 5px 0 #d4a017;
+    z-index: 10;
+    transition: transform 0.3s cubic-bezier(.5, 1.6, .5, 1) 1.2s;
+    white-space: nowrap;
+  }
+  .game-banner .big {
+    display: block;
+    font-size: clamp(10px, 2.8vw, 13px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .game-banner .sub {
+    display: block;
+    font-size: 7px;
+    margin-top: 8px;
+    color: #c8385a;
+    letter-spacing: 1px;
+    animation: pxBlink 0.5s steps(2) infinite;
+  }
+  .ceremony-done .game-banner { transform: translate(-50%, -50%) scale(1); }
+
+  /* falling pixel hearts (celebration) */
   .petals-burst {
     position: absolute; inset: 0;
     pointer-events: none;
     overflow: hidden;
-    z-index: 4;
+    z-index: 6;
   }
-  .celebration-petal {
+  .pixel-heart {
     position: absolute;
-    top: -20px;
+    top: -16px;
     width: 12px; height: 12px;
-    border-radius: 65% 35% 65% 35%;
-    background: radial-gradient(circle at 30% 30%, #fff5c0 0%, #f4a050 45%, #c84020 100%);
-    box-shadow: 0 0 4px rgba(244, 128, 60, 0.45);
-    animation: petalFall var(--dur, 2.4s) cubic-bezier(.4, .2, .3, .9) forwards;
+    background:
+      radial-gradient(circle at 30% 30%, transparent 30%, #c8385a 31%, #c8385a 60%, transparent 61%) 0 0/6px 6px no-repeat,
+      radial-gradient(circle at 30% 30%, transparent 30%, #c8385a 31%, #c8385a 60%, transparent 61%) 6px 0/6px 6px no-repeat,
+      #c8385a;
+    clip-path: polygon(0 25%, 25% 0, 50% 25%, 75% 0, 100% 25%, 100% 50%, 50% 100%, 0 50%);
+    animation: pxHeartFall var(--dur, 1.8s) steps(20) forwards;
   }
-  @keyframes petalFall {
+  @keyframes pxHeartFall {
     0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
     10%  { opacity: 1; }
-    100% { transform: translate(var(--drift, 30px), 100vh) rotate(720deg); opacity: 0; }
+    100% { transform: translate(var(--drift, 30px), 600px) rotate(0deg); opacity: 0; }
   }
 
+  /* message under stage */
   .game-message {
     text-align: center;
-    font-family: 'Italianno', cursive;
-    font-size: clamp(24px, 6vw, 32px);
-    color: var(--gold-light);
-    line-height: 1.2;
     margin: 22px auto 0;
-    min-height: 40px;
-    max-width: 480px;
+    font-family: 'Press Start 2P', monospace;
+    color: var(--gold-light);
+    font-size: clamp(8px, 2.2vw, 10px);
+    line-height: 1.7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-height: 18px;
     padding: 0 12px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .game-message .heart { color: var(--rose-accent); }
+  .game-message .heart { color: var(--game-heart); }
 
+  /* retro chunky button */
   .ceremony-btn {
     display: block;
-    margin: 22px auto 0;
-    padding: 14px 36px;
-    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 100%);
-    border: 1.5px solid var(--gold-bright);
-    color: var(--deep);
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 5px;
+    margin: 18px auto 0;
+    padding: 14px 22px 14px 24px;
+    background: #d4a017;
+    border: 3px solid #2a1043;
+    color: #2a1043;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
-    box-shadow: 0 4px 18px rgba(216, 160, 23, 0.35);
-    padding-left: 41px;
+    box-shadow: 4px 4px 0 #2a1043;
+    transition: transform 0.08s, box-shadow 0.08s, background 0.2s;
   }
-  .ceremony-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 26px rgba(216, 160, 23, 0.55);
+  .ceremony-btn:hover  { background: #e8c97a; }
+  .ceremony-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 #2a1043;
   }
-  .ceremony-btn:active { transform: translateY(0); }
   .ceremony-btn:disabled {
-    opacity: 0.6;
+    background: #b8a47a;
     cursor: not-allowed;
     transform: none;
+    box-shadow: 4px 4px 0 #2a1043;
   }
 
   @media (max-width: 380px) {
-    .ceremony-btn { font-size: 10px; letter-spacing: 3px; padding: 12px 24px; }
+    .ceremony-btn { font-size: 8px; letter-spacing: 1px; padding: 12px 16px; }
+    .character    { width: 48px; height: 70px; }
   }
 
   /* ============================================================
@@ -1041,260 +1151,211 @@
 </section>
 
 <!-- ============================================================
-     VARMALA CEREMONY GAME
+     VARMALA CEREMONY GAME — retro pixel style
      ============================================================ -->
 <section class="bg-plum-mid">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">A Little Ceremony</div>
+    <div class="eyebrow reveal">Mini Game</div>
     <h2 class="reveal">The Varmala</h2>
-    <div class="script reveal">complete the ritual &mdash; tap to begin</div>
+    <div class="script reveal">an 8-bit ceremony &mdash; press start</div>
     <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
     <div class="varmala-stage reveal reveal-scale" id="varmalaStage">
-      <div class="petals-burst" id="petalsBurst"></div>
+      <!-- score bar -->
+      <div class="score-bar">
+        <span>Ritual <span id="gameScore">0000</span></span>
+        <span class="hi">Hi <span class="blink">9999</span></span>
+      </div>
 
-      <!-- ============ DULHA (groom) ============ -->
-      <div class="character dulha">
-        <svg class="figure" viewBox="0 0 100 150" preserveAspectRatio="xMidYMax meet">
-          <!-- pagdi / turban -->
-          <ellipse cx="50" cy="22" rx="22" ry="13" fill="#b76e79" stroke="#5a1f3a" stroke-width="1.2"/>
-          <ellipse cx="50" cy="17" rx="20" ry="5" fill="#d4a017"/>
-          <path d="M50 6 L 54 14 L 46 14 Z" fill="#fff5c0" stroke="#5a3a04" stroke-width="0.4"/>
-          <circle cx="50" cy="14" r="1.6" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <!-- face -->
-          <circle cx="50" cy="42" r="13" fill="#e6c098" stroke="#5a3018" stroke-width="0.6"/>
-          <!-- eyes -->
-          <circle cx="45" cy="40" r="1.4" fill="#2a1408"/>
-          <circle cx="55" cy="40" r="1.4" fill="#2a1408"/>
-          <!-- eyebrows -->
-          <path d="M42 36 Q 45 35, 48 36" stroke="#2a1408" stroke-width="0.9" fill="none" stroke-linecap="round"/>
-          <path d="M52 36 Q 55 35, 58 36" stroke="#2a1408" stroke-width="0.9" fill="none" stroke-linecap="round"/>
-          <!-- mustache -->
-          <path d="M44 48 Q 50 51, 56 48" stroke="#2a1408" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <!-- smile -->
-          <path d="M46 52 Q 50 54, 54 52" stroke="#5a3018" stroke-width="0.8" fill="none" stroke-linecap="round"/>
-          <!-- ears -->
-          <ellipse cx="37" cy="42" rx="1.5" ry="2.5" fill="#e6c098" stroke="#5a3018" stroke-width="0.4"/>
-          <ellipse cx="63" cy="42" rx="1.5" ry="2.5" fill="#e6c098" stroke="#5a3018" stroke-width="0.4"/>
-          <!-- sherwani body -->
-          <path d="M30 60 Q 28 130, 31 145 L 69 145 Q 72 130, 70 60 Q 60 56, 50 56 Q 40 56, 30 60 Z"
-                fill="#5d3a85" stroke="#d4a017" stroke-width="1.2"/>
-          <!-- gold trim down middle -->
-          <line x1="50" y1="58" x2="50" y2="142" stroke="#d4a017" stroke-width="0.8"/>
-          <!-- gold buttons -->
-          <circle cx="50" cy="72" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <circle cx="50" cy="84" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <circle cx="50" cy="96" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <circle cx="50" cy="108" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <circle cx="50" cy="120" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <!-- gold embroidery hem -->
-          <line x1="32" y1="142" x2="68" y2="142" stroke="#d4a017" stroke-width="1.2"/>
-          <!-- arms -->
-          <ellipse cx="28" cy="80" rx="5" ry="22" fill="#5d3a85" stroke="#d4a017" stroke-width="0.8"/>
-          <ellipse cx="72" cy="80" rx="5" ry="22" fill="#5d3a85" stroke="#d4a017" stroke-width="0.8"/>
-          <!-- hands -->
-          <circle cx="28" cy="102" r="4" fill="#e6c098" stroke="#5a3018" stroke-width="0.5"/>
-          <circle cx="72" cy="102" r="4" fill="#e6c098" stroke="#5a3018" stroke-width="0.5"/>
-          <!-- shoes -->
-          <ellipse cx="40" cy="146" rx="6" ry="3" fill="#3a1d62" stroke="#d4a017" stroke-width="0.5"/>
-          <ellipse cx="60" cy="146" rx="6" ry="3" fill="#3a1d62" stroke="#d4a017" stroke-width="0.5"/>
+      <!-- chunky pixel clouds -->
+      <div class="px-cloud cloud-1">
+        <svg viewBox="0 0 8 3" preserveAspectRatio="none">
+          <rect x="1" y="0" width="6" height="1" fill="#2a1043"/>
+          <rect x="0" y="1" width="8" height="1" fill="#2a1043"/>
+          <rect x="1" y="2" width="6" height="1" fill="#2a1043"/>
         </svg>
-
-        <!-- Dulha's held garland -->
-        <svg class="garland held" viewBox="0 0 80 50">
-          <g>
-            <path d="M14 6 Q 12 30, 22 44" fill="none" stroke="#5a6b50" stroke-width="1.3"/>
-            <path d="M66 6 Q 68 30, 58 44" fill="none" stroke="#5a6b50" stroke-width="1.3"/>
-            <path d="M22 44 Q 40 50, 58 44" fill="none" stroke="#5a6b50" stroke-width="1.3"/>
-            <!-- flowers (marigolds) -->
-            <circle cx="14" cy="9"  r="2.6" fill="#f48030"/>
-            <circle cx="14" cy="15" r="2.6" fill="#f4a050"/>
-            <circle cx="15" cy="21" r="2.6" fill="#f48030"/>
-            <circle cx="17" cy="27" r="2.6" fill="#ec6e3a"/>
-            <circle cx="20" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="22" cy="39" r="2.6" fill="#f4a050"/>
-            <circle cx="28" cy="46" r="3"   fill="#ec6e3a"/>
-            <circle cx="36" cy="48" r="3.2" fill="#f48030"/>
-            <circle cx="44" cy="48" r="3.2" fill="#f4a050"/>
-            <circle cx="52" cy="46" r="3"   fill="#ec6e3a"/>
-            <circle cx="58" cy="39" r="2.6" fill="#f4a050"/>
-            <circle cx="60" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="63" cy="27" r="2.6" fill="#ec6e3a"/>
-            <circle cx="65" cy="21" r="2.6" fill="#f48030"/>
-            <circle cx="66" cy="15" r="2.6" fill="#f4a050"/>
-            <circle cx="66" cy="9"  r="2.6" fill="#f48030"/>
-            <!-- flower centers -->
-            <circle cx="36" cy="48" r="1.1" fill="#7a3a18"/>
-            <circle cx="44" cy="48" r="1.1" fill="#7a3a18"/>
-            <!-- leaves -->
-            <ellipse cx="20" cy="36" rx="2.6" ry="1.4" fill="#4a5a32" transform="rotate(-25 20 36)"/>
-            <ellipse cx="60" cy="36" rx="2.6" ry="1.4" fill="#4a5a32" transform="rotate(25 60 36)"/>
-            <!-- gold ribbon at top -->
-            <path d="M34 4 L 46 4 L 48 9 L 32 9 Z" fill="#d4a017" stroke="#5a3a04" stroke-width="0.4"/>
-            <path d="M40 9 L 36 14 M 40 9 L 44 14" stroke="#d4a017" stroke-width="1" fill="none"/>
-          </g>
+      </div>
+      <div class="px-cloud cloud-2">
+        <svg viewBox="0 0 7 3" preserveAspectRatio="none">
+          <rect x="1" y="0" width="5" height="1" fill="#2a1043"/>
+          <rect x="0" y="1" width="7" height="1" fill="#2a1043"/>
+          <rect x="2" y="2" width="3" height="1" fill="#2a1043"/>
         </svg>
-
-        <!-- Dulha's WORN garland (appears after exchange — Dulhan's flower colour) -->
-        <svg class="garland worn" viewBox="0 0 80 50">
-          <g>
-            <path d="M10 14 Q 40 42, 70 14" fill="none" stroke="#5a6b50" stroke-width="1.2"/>
-            <circle cx="14" cy="16" r="2.4" fill="#f4a050"/>
-            <circle cx="20" cy="22" r="2.4" fill="#f48030"/>
-            <circle cx="26" cy="28" r="2.4" fill="#ec6e3a"/>
-            <circle cx="32" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="40" cy="36" r="3"   fill="#ec6e3a"/>
-            <circle cx="48" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="54" cy="28" r="2.4" fill="#ec6e3a"/>
-            <circle cx="60" cy="22" r="2.4" fill="#f48030"/>
-            <circle cx="66" cy="16" r="2.4" fill="#f4a050"/>
-            <circle cx="40" cy="36" r="1" fill="#7a3a18"/>
-            <ellipse cx="32" cy="30" rx="2.2" ry="1.2" fill="#4a5a32" transform="rotate(-20 32 30)"/>
-            <ellipse cx="48" cy="30" rx="2.2" ry="1.2" fill="#4a5a32" transform="rotate(20 48 30)"/>
-          </g>
+      </div>
+      <div class="px-cloud cloud-3">
+        <svg viewBox="0 0 6 2" preserveAspectRatio="none">
+          <rect x="1" y="0" width="4" height="1" fill="#2a1043"/>
+          <rect x="0" y="1" width="6" height="1" fill="#2a1043"/>
         </svg>
       </div>
 
-      <!-- ============ DULHAN (bride) ============ -->
-      <div class="character dulhan">
-        <svg class="figure" viewBox="0 0 100 150" preserveAspectRatio="xMidYMax meet">
-          <!-- dupatta over head -->
-          <path d="M18 36 Q 30 8, 50 6 Q 70 8, 82 36 L 78 50 Q 50 32, 22 50 Z"
-                fill="#c8385a" stroke="#5a1f3a" stroke-width="1"/>
-          <!-- gold border on dupatta edge -->
-          <path d="M18 36 Q 30 10, 50 8 Q 70 10, 82 36"
-                fill="none" stroke="#d4a017" stroke-width="1.6"/>
-          <!-- gold dots embroidery on dupatta -->
-          <circle cx="30" cy="24" r="0.7" fill="#d4a017"/>
-          <circle cx="40" cy="18" r="0.7" fill="#d4a017"/>
-          <circle cx="50" cy="14" r="0.7" fill="#d4a017"/>
-          <circle cx="60" cy="18" r="0.7" fill="#d4a017"/>
-          <circle cx="70" cy="24" r="0.7" fill="#d4a017"/>
+      <!-- ground -->
+      <div class="ground-line"></div>
+
+      <!-- ready prompt -->
+      <div class="ready-prompt">&gt; Press Start &lt;</div>
+
+      <!-- celebration overlay -->
+      <div class="petals-burst" id="petalsBurst"></div>
+      <div class="game-banner" id="gameBanner">
+        <span class="big">Bow Ho Gaya!</span>
+        <span class="sub">&hearts; Mr &amp; Mrs Nandwani &hearts;</span>
+      </div>
+
+      <!-- ============ DULHA (groom) — pixel sprite ============ -->
+      <div class="character dulha">
+        <svg class="sprite" viewBox="0 0 14 20" preserveAspectRatio="xMidYMax meet">
+          <!-- feather (gold) -->
+          <rect x="6" y="0" width="1" height="2" fill="#d4a017"/>
+          <rect x="7" y="0" width="1" height="1" fill="#d4a017"/>
+          <!-- turban (red/maroon) -->
+          <rect x="4" y="1" width="6" height="1" fill="#b76e79"/>
+          <rect x="3" y="2" width="8" height="2" fill="#b76e79"/>
+          <!-- gold band on turban -->
+          <rect x="3" y="3" width="8" height="1" fill="#d4a017"/>
           <!-- face -->
-          <circle cx="50" cy="42" r="13" fill="#ecc5a5" stroke="#5a3018" stroke-width="0.6"/>
-          <!-- bindi -->
-          <circle cx="50" cy="31" r="1.6" fill="#c8385a" stroke="#5a1f3a" stroke-width="0.3"/>
-          <!-- eyes (with eyeliner) -->
-          <ellipse cx="45" cy="40" rx="1.6" ry="1.1" fill="#2a1408"/>
-          <ellipse cx="55" cy="40" rx="1.6" ry="1.1" fill="#2a1408"/>
-          <path d="M43 38.5 Q 45 37.6, 47 38.5" stroke="#2a1408" stroke-width="0.4" fill="none"/>
-          <path d="M53 38.5 Q 55 37.6, 57 38.5" stroke="#2a1408" stroke-width="0.4" fill="none"/>
-          <!-- eyebrows -->
-          <path d="M42 36 Q 45 35, 48 36" stroke="#2a1408" stroke-width="0.7" fill="none" stroke-linecap="round"/>
-          <path d="M52 36 Q 55 35, 58 36" stroke="#2a1408" stroke-width="0.7" fill="none" stroke-linecap="round"/>
-          <!-- lips -->
-          <ellipse cx="50" cy="50" rx="2.4" ry="1.1" fill="#c8385a"/>
-          <!-- nath (nose ring) chain -->
-          <circle cx="46.5" cy="46" r="0.8" fill="#d4a017" stroke="#5a3a04" stroke-width="0.25"/>
-          <path d="M47 46.5 Q 43 47, 41 50" stroke="#d4a017" stroke-width="0.5" fill="none"/>
-          <!-- earrings -->
-          <circle cx="36.5" cy="46" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <circle cx="63.5" cy="46" r="1.5" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
-          <!-- maang tikka (forehead chain) -->
-          <path d="M50 16 L 50 26" stroke="#d4a017" stroke-width="0.6"/>
-          <circle cx="50" cy="26" r="1.2" fill="#d4a017" stroke="#5a3a04" stroke-width="0.3"/>
+          <rect x="4" y="4" width="6" height="3" fill="#e6c098"/>
+          <!-- eyes (dark) -->
+          <rect x="5" y="5" width="1" height="1" fill="#2a1043"/>
+          <rect x="8" y="5" width="1" height="1" fill="#2a1043"/>
+          <!-- mustache -->
+          <rect x="5" y="6" width="4" height="1" fill="#2a1043"/>
           <!-- neck -->
-          <rect x="46" y="54" width="8" height="4" fill="#ecc5a5"/>
+          <rect x="6" y="7" width="2" height="1" fill="#e6c098"/>
+          <!-- shoulders -->
+          <rect x="3" y="8" width="8" height="1" fill="#2a1043"/>
+          <!-- body (sherwani) -->
+          <rect x="2" y="9" width="10" height="6" fill="#2a1043"/>
+          <!-- gold trim down middle -->
+          <rect x="6" y="9" width="2" height="6" fill="#d4a017"/>
+          <!-- arms outline -->
+          <rect x="1" y="9" width="1" height="5" fill="#2a1043"/>
+          <rect x="12" y="9" width="1" height="5" fill="#2a1043"/>
+          <!-- hands -->
+          <rect x="1" y="14" width="1" height="1" fill="#e6c098"/>
+          <rect x="12" y="14" width="1" height="1" fill="#e6c098"/>
+          <!-- legs (a frame) -->
+          <g class="legs-a">
+            <rect x="3" y="15" width="2" height="4" fill="#2a1043"/>
+            <rect x="9" y="15" width="2" height="4" fill="#2a1043"/>
+            <!-- feet -->
+            <rect x="2" y="19" width="3" height="1" fill="#2a1043"/>
+            <rect x="9" y="19" width="3" height="1" fill="#2a1043"/>
+          </g>
+        </svg>
+
+        <!-- Dulha's held garland (pixel marigold) -->
+        <svg class="garland-pixel held" viewBox="0 0 11 7">
+          <!-- top ribbon -->
+          <rect x="5" y="0" width="1" height="1" fill="#d4a017"/>
+          <!-- marigold cluster -->
+          <rect x="0" y="2" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="2" y="1" width="2" height="2" fill="#f4a050"/>
+          <rect x="4" y="2" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="6" y="1" width="2" height="2" fill="#f4a050"/>
+          <rect x="8" y="2" width="2" height="2" fill="#ec6e3a"/>
+          <!-- bottom row -->
+          <rect x="1" y="4" width="2" height="2" fill="#f4a050"/>
+          <rect x="3" y="5" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="5" y="5" width="2" height="2" fill="#f4a050"/>
+          <rect x="7" y="4" width="2" height="2" fill="#ec6e3a"/>
+        </svg>
+
+        <!-- Dulha's WORN garland (after exchange) -->
+        <svg class="garland-pixel worn" viewBox="0 0 15 6">
+          <rect x="0" y="2" width="2" height="2" fill="#f4a050"/>
+          <rect x="2" y="3" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="4" y="3" width="2" height="2" fill="#f4a050"/>
+          <rect x="6" y="4" width="3" height="2" fill="#ec6e3a"/>
+          <rect x="9" y="3" width="2" height="2" fill="#f4a050"/>
+          <rect x="11" y="3" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="13" y="2" width="2" height="2" fill="#f4a050"/>
+        </svg>
+      </div>
+
+      <!-- ============ DULHAN (bride) — pixel sprite ============ -->
+      <div class="character dulhan">
+        <svg class="sprite" viewBox="0 0 14 20" preserveAspectRatio="xMidYMax meet">
+          <!-- dupatta over head (red) -->
+          <rect x="3" y="0" width="8" height="1" fill="#c8385a"/>
+          <rect x="2" y="1" width="10" height="3" fill="#c8385a"/>
+          <!-- gold border on dupatta -->
+          <rect x="2" y="1" width="10" height="1" fill="#d4a017"/>
+          <!-- gold maang tikka in middle -->
+          <rect x="6" y="2" width="2" height="1" fill="#d4a017"/>
+          <!-- face -->
+          <rect x="4" y="4" width="6" height="3" fill="#ecc5a5"/>
+          <!-- bindi -->
+          <rect x="6" y="4" width="2" height="1" fill="#c8385a"/>
+          <!-- eyes -->
+          <rect x="5" y="5" width="1" height="1" fill="#2a1043"/>
+          <rect x="8" y="5" width="1" height="1" fill="#2a1043"/>
+          <!-- lips -->
+          <rect x="6" y="6" width="2" height="1" fill="#c8385a"/>
+          <!-- earrings (gold) -->
+          <rect x="3" y="5" width="1" height="1" fill="#d4a017"/>
+          <rect x="10" y="5" width="1" height="1" fill="#d4a017"/>
+          <!-- neck -->
+          <rect x="6" y="7" width="2" height="1" fill="#ecc5a5"/>
           <!-- gold necklace -->
-          <path d="M40 58 Q 50 64, 60 58" fill="none" stroke="#d4a017" stroke-width="1.2"/>
-          <circle cx="50" cy="62" r="1.5" fill="#d4a017"/>
-          <!-- lehenga blouse (choli) -->
-          <path d="M32 60 Q 36 64, 50 64 Q 64 64, 68 60 L 70 76 Q 50 80, 30 76 Z"
-                fill="#c8385a" stroke="#d4a017" stroke-width="0.9"/>
-          <!-- arms with bangles -->
-          <ellipse cx="26" cy="80" rx="4.5" ry="20" fill="#ecc5a5" stroke="#5a3018" stroke-width="0.5"/>
-          <ellipse cx="74" cy="80" rx="4.5" ry="20" fill="#ecc5a5" stroke="#5a3018" stroke-width="0.5"/>
-          <g stroke="#d4a017" stroke-width="0.5" fill="none">
-            <line x1="21.5" y1="86" x2="30.5" y2="86"/>
-            <line x1="21.5" y1="89" x2="30.5" y2="89"/>
-            <line x1="21.5" y1="92" x2="30.5" y2="92"/>
-            <line x1="69.5" y1="86" x2="78.5" y2="86"/>
-            <line x1="69.5" y1="89" x2="78.5" y2="89"/>
-            <line x1="69.5" y1="92" x2="78.5" y2="92"/>
-          </g>
+          <rect x="5" y="8" width="4" height="1" fill="#d4a017"/>
+          <!-- choli (blouse) — red -->
+          <rect x="3" y="8" width="2" height="1" fill="#c8385a"/>
+          <rect x="9" y="8" width="2" height="1" fill="#c8385a"/>
+          <rect x="3" y="9" width="8" height="2" fill="#c8385a"/>
+          <!-- midriff / waist -->
+          <rect x="5" y="11" width="4" height="1" fill="#ecc5a5"/>
+          <!-- lehenga skirt (flared red with gold) -->
+          <rect x="3" y="12" width="8" height="3" fill="#c8385a"/>
+          <rect x="2" y="15" width="10" height="3" fill="#c8385a"/>
+          <!-- gold dots on skirt -->
+          <rect x="5" y="13" width="1" height="1" fill="#d4a017"/>
+          <rect x="8" y="13" width="1" height="1" fill="#d4a017"/>
+          <rect x="4" y="16" width="1" height="1" fill="#d4a017"/>
+          <rect x="7" y="16" width="1" height="1" fill="#d4a017"/>
+          <rect x="9" y="16" width="1" height="1" fill="#d4a017"/>
+          <!-- gold trim at bottom -->
+          <rect x="2" y="18" width="10" height="1" fill="#d4a017"/>
+          <rect x="2" y="19" width="10" height="1" fill="#c8385a"/>
+          <!-- arms outline (skin) -->
+          <rect x="2" y="9" width="1" height="3" fill="#ecc5a5"/>
+          <rect x="11" y="9" width="1" height="3" fill="#ecc5a5"/>
           <!-- hands with henna -->
-          <circle cx="26" cy="100" r="4" fill="#ecc5a5" stroke="#5a3018" stroke-width="0.5"/>
-          <circle cx="74" cy="100" r="4" fill="#ecc5a5" stroke="#5a3018" stroke-width="0.5"/>
-          <circle cx="26" cy="100" r="2.4" fill="#a84a18" opacity="0.6"/>
-          <circle cx="74" cy="100" r="2.4" fill="#a84a18" opacity="0.6"/>
-          <!-- lehenga skirt (flared) -->
-          <path d="M28 76 L 16 145 L 84 145 L 72 76 Z"
-                fill="#c8385a" stroke="#d4a017" stroke-width="1"/>
-          <!-- gold border at bottom of skirt -->
-          <path d="M17 138 L 83 138" stroke="#d4a017" stroke-width="2"/>
-          <path d="M17 141 L 83 141" stroke="#d4a017" stroke-width="0.6"/>
-          <!-- embroidery dots on skirt -->
-          <g fill="#d4a017">
-            <circle cx="40" cy="100" r="0.9"/>
-            <circle cx="50" cy="98"  r="0.9"/>
-            <circle cx="60" cy="100" r="0.9"/>
-            <circle cx="35" cy="115" r="0.9"/>
-            <circle cx="50" cy="113" r="0.9"/>
-            <circle cx="65" cy="115" r="0.9"/>
-            <circle cx="30" cy="130" r="0.9"/>
-            <circle cx="50" cy="128" r="0.9"/>
-            <circle cx="70" cy="130" r="0.9"/>
-          </g>
-          <!-- hair strand visible -->
-          <path d="M38 50 Q 35 65, 38 78" fill="none" stroke="#1a0e08" stroke-width="2"/>
+          <rect x="1" y="11" width="1" height="1" fill="#a84a18"/>
+          <rect x="12" y="11" width="1" height="1" fill="#a84a18"/>
         </svg>
 
-        <!-- Dulhan's held garland -->
-        <svg class="garland held" viewBox="0 0 80 50">
-          <g>
-            <path d="M14 6 Q 12 30, 22 44" fill="none" stroke="#5a6b50" stroke-width="1.3"/>
-            <path d="M66 6 Q 68 30, 58 44" fill="none" stroke="#5a6b50" stroke-width="1.3"/>
-            <path d="M22 44 Q 40 50, 58 44" fill="none" stroke="#5a6b50" stroke-width="1.3"/>
-            <circle cx="14" cy="9"  r="2.6" fill="#f48030"/>
-            <circle cx="14" cy="15" r="2.6" fill="#f4a050"/>
-            <circle cx="15" cy="21" r="2.6" fill="#f48030"/>
-            <circle cx="17" cy="27" r="2.6" fill="#ec6e3a"/>
-            <circle cx="20" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="22" cy="39" r="2.6" fill="#f4a050"/>
-            <circle cx="28" cy="46" r="3"   fill="#ec6e3a"/>
-            <circle cx="36" cy="48" r="3.2" fill="#f48030"/>
-            <circle cx="44" cy="48" r="3.2" fill="#f4a050"/>
-            <circle cx="52" cy="46" r="3"   fill="#ec6e3a"/>
-            <circle cx="58" cy="39" r="2.6" fill="#f4a050"/>
-            <circle cx="60" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="63" cy="27" r="2.6" fill="#ec6e3a"/>
-            <circle cx="65" cy="21" r="2.6" fill="#f48030"/>
-            <circle cx="66" cy="15" r="2.6" fill="#f4a050"/>
-            <circle cx="66" cy="9"  r="2.6" fill="#f48030"/>
-            <circle cx="36" cy="48" r="1.1" fill="#7a3a18"/>
-            <circle cx="44" cy="48" r="1.1" fill="#7a3a18"/>
-            <ellipse cx="20" cy="36" rx="2.6" ry="1.4" fill="#4a5a32" transform="rotate(-25 20 36)"/>
-            <ellipse cx="60" cy="36" rx="2.6" ry="1.4" fill="#4a5a32" transform="rotate(25 60 36)"/>
-            <path d="M34 4 L 46 4 L 48 9 L 32 9 Z" fill="#d4a017" stroke="#5a3a04" stroke-width="0.4"/>
-            <path d="M40 9 L 36 14 M 40 9 L 44 14" stroke="#d4a017" stroke-width="1" fill="none"/>
-          </g>
+        <!-- Dulhan's held garland (pixel marigold) -->
+        <svg class="garland-pixel held" viewBox="0 0 11 7">
+          <rect x="5" y="0" width="1" height="1" fill="#d4a017"/>
+          <rect x="0" y="2" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="2" y="1" width="2" height="2" fill="#f4a050"/>
+          <rect x="4" y="2" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="6" y="1" width="2" height="2" fill="#f4a050"/>
+          <rect x="8" y="2" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="1" y="4" width="2" height="2" fill="#f4a050"/>
+          <rect x="3" y="5" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="5" y="5" width="2" height="2" fill="#f4a050"/>
+          <rect x="7" y="4" width="2" height="2" fill="#ec6e3a"/>
         </svg>
 
-        <!-- Dulhan's WORN garland (appears after exchange) -->
-        <svg class="garland worn" viewBox="0 0 80 50">
-          <g>
-            <path d="M10 14 Q 40 42, 70 14" fill="none" stroke="#5a6b50" stroke-width="1.2"/>
-            <circle cx="14" cy="16" r="2.4" fill="#f4a050"/>
-            <circle cx="20" cy="22" r="2.4" fill="#f48030"/>
-            <circle cx="26" cy="28" r="2.4" fill="#ec6e3a"/>
-            <circle cx="32" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="40" cy="36" r="3"   fill="#ec6e3a"/>
-            <circle cx="48" cy="33" r="2.6" fill="#f48030"/>
-            <circle cx="54" cy="28" r="2.4" fill="#ec6e3a"/>
-            <circle cx="60" cy="22" r="2.4" fill="#f48030"/>
-            <circle cx="66" cy="16" r="2.4" fill="#f4a050"/>
-            <circle cx="40" cy="36" r="1" fill="#7a3a18"/>
-            <ellipse cx="32" cy="30" rx="2.2" ry="1.2" fill="#4a5a32" transform="rotate(-20 32 30)"/>
-            <ellipse cx="48" cy="30" rx="2.2" ry="1.2" fill="#4a5a32" transform="rotate(20 48 30)"/>
-          </g>
+        <!-- Dulhan's WORN garland (after exchange) -->
+        <svg class="garland-pixel worn" viewBox="0 0 15 6">
+          <rect x="0" y="2" width="2" height="2" fill="#f4a050"/>
+          <rect x="2" y="3" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="4" y="3" width="2" height="2" fill="#f4a050"/>
+          <rect x="6" y="4" width="3" height="2" fill="#ec6e3a"/>
+          <rect x="9" y="3" width="2" height="2" fill="#f4a050"/>
+          <rect x="11" y="3" width="2" height="2" fill="#ec6e3a"/>
+          <rect x="13" y="2" width="2" height="2" fill="#f4a050"/>
         </svg>
       </div>
     </div>
 
-    <div class="game-message reveal" id="gameMessage">Are you ready?</div>
+    <div class="game-message reveal" id="gameMessage">&gt; Insert coin &lt;</div>
 
-    <button class="ceremony-btn reveal" id="ceremonyBtn" type="button">Proceed with Ceremony</button>
+    <button class="ceremony-btn reveal" id="ceremonyBtn" type="button">▶ Start Ceremony</button>
   </div>
 </section>
 
@@ -1370,65 +1431,79 @@
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   })();
 
-  // -------- Varmala ceremony game --------
+  // -------- Varmala ceremony game (retro pixel) --------
   (function () {
     var stage = document.getElementById('varmalaStage');
     var btn = document.getElementById('ceremonyBtn');
     var msg = document.getElementById('gameMessage');
     var burst = document.getElementById('petalsBurst');
+    var scoreEl = document.getElementById('gameScore');
     if (!stage || !btn || !msg) return;
 
     var done = false;
+    var scoreRaf = null;
 
-    function dropPetals(count) {
+    function dropPixelHearts(count) {
       if (!burst) return;
       for (var i = 0; i < count; i++) {
         var p = document.createElement('div');
-        p.className = 'celebration-petal';
+        p.className = 'pixel-heart';
         p.style.left = (5 + Math.random() * 90) + '%';
-        p.style.setProperty('--drift', ((Math.random() * 120 - 60) | 0) + 'px');
-        p.style.setProperty('--dur', (2 + Math.random() * 1.6).toFixed(2) + 's');
+        p.style.setProperty('--drift', ((Math.random() * 100 - 50) | 0) + 'px');
+        p.style.setProperty('--dur', (1.6 + Math.random() * 1.4).toFixed(2) + 's');
         p.style.animationDelay = (Math.random() * 0.6).toFixed(2) + 's';
-        var sz = 8 + Math.random() * 8;
+        var sz = 10 + Math.floor(Math.random() * 6);
         p.style.width = sz + 'px';
         p.style.height = sz + 'px';
         burst.appendChild(p);
         (function (el) {
-          setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 4200);
+          setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 3800);
         })(p);
       }
     }
 
+    function animateScore(from, to, duration) {
+      if (scoreRaf) cancelAnimationFrame(scoreRaf);
+      var start = null;
+      function tick(now) {
+        if (start === null) start = now;
+        var t = Math.min(1, (now - start) / duration);
+        // ease out
+        var eased = 1 - Math.pow(1 - t, 2);
+        var val = Math.floor(from + (to - from) * eased);
+        if (scoreEl) scoreEl.textContent = String(val).padStart(4, '0');
+        if (t < 1) scoreRaf = requestAnimationFrame(tick);
+      }
+      scoreRaf = requestAnimationFrame(tick);
+    }
+
     function startCeremony() {
       btn.disabled = true;
-      msg.textContent = 'The garlands take flight…';
+      msg.textContent = 'walking toward the mandap...';
       stage.classList.remove('ceremony-done');
-      // force reflow so animation restarts on replay
-      void stage.offsetWidth;
+      void stage.offsetWidth; // restart animations on replay
       stage.classList.add('ceremony-starting');
+      animateScore(0, 9999, 1400);
       setTimeout(function () {
         stage.classList.add('ceremony-done');
-        msg.innerHTML = 'Bow ho gaya! &mdash; <span class="heart">&hearts;</span> Mr. &amp; Mrs. Nandwani <span class="heart">&hearts;</span>';
-        btn.textContent = 'Play Again';
+        msg.innerHTML = '&gt; level complete &lt; <span class="heart">&hearts;</span> bow ho gaya <span class="heart">&hearts;</span>';
+        btn.textContent = '↻ Play Again';
         btn.disabled = false;
         done = true;
-        dropPetals(28);
+        dropPixelHearts(24);
       }, 1500);
     }
 
     function reset() {
       stage.classList.remove('ceremony-starting', 'ceremony-done');
-      msg.textContent = 'Are you ready?';
-      btn.textContent = 'Proceed with Ceremony';
+      if (scoreEl) scoreEl.textContent = '0000';
+      msg.textContent = '> insert coin <';
+      btn.textContent = '▶ Start Ceremony';
       done = false;
     }
 
     btn.addEventListener('click', function () {
-      if (done) {
-        reset();
-        // tiny celebratory pop on reset too — just one beat of petals
-        return;
-      }
+      if (done) { reset(); return; }
       startCeremony();
     });
   })();
