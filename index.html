@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <meta name="theme-color" content="#15082a" />
 <title>Riu &amp; Diu &middot; Two Hearts, One Home</title>
-<meta name="description" content="The wedding of Rinky &amp; Deepak — June 28-29, 2026. After everything life taught them separately, they found home in each other." />
+<meta name="description" content="The wedding of Rinky &amp; Deepak — June 28-29, 2026." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,6 @@
      ============================================================ */
 
   :root {
-    /* purples */
     --deep: #0e0520;
     --plum: #1c0d3a;
     --plum-mid: #2b1453;
@@ -27,19 +26,16 @@
     --purple-light: #5d3a85;
     --purple-hi: #7a55a8;
 
-    /* golds */
     --gold: #b89968;
     --gold-bright: #d4a017;
     --gold-light: #e8c97a;
     --gold-pale: #f5e3b8;
 
-    /* warm text */
     --cream: #f5e9d0;
     --ivory: #fde9c8;
     --soft-cream: #d8c5a8;
     --muted: #a8957c;
 
-    /* accents */
     --rose-accent: #d4546e;
     --heart: #d4a017;
 
@@ -62,7 +58,6 @@
   }
 
   img { max-width: 100%; height: auto; display: block; }
-
   ::selection { background: var(--gold); color: var(--deep); }
 
   /* ============== reveal animations ============== */
@@ -84,8 +79,6 @@
   .stagger.in-view > *:nth-child(4) { transition-delay: 0.44s; }
   .stagger.in-view > *:nth-child(5) { transition-delay: 0.57s; }
   .stagger.in-view > *:nth-child(6) { transition-delay: 0.70s; }
-  .stagger.in-view > *:nth-child(7) { transition-delay: 0.83s; }
-  .stagger.in-view > *:nth-child(8) { transition-delay: 0.96s; }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1; transform: none; transition: none; }
@@ -95,25 +88,20 @@
   .container { width: 100%; max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
   section { padding: 96px 0; position: relative; }
 
-  /* alternating dark backgrounds */
   .bg-plum {
-    background:
-      radial-gradient(ellipse at 50% 0%, var(--plum-bright) 0%, var(--plum) 50%, var(--deep) 100%);
+    background: radial-gradient(ellipse at 50% 0%, var(--plum-bright) 0%, var(--plum) 50%, var(--deep) 100%);
   }
   .bg-plum-mid {
-    background:
-      radial-gradient(ellipse at 50% 0%, var(--purple) 0%, var(--plum-mid) 55%, var(--plum) 100%);
+    background: radial-gradient(ellipse at 50% 0%, var(--purple) 0%, var(--plum-mid) 55%, var(--plum) 100%);
   }
   .bg-purple {
-    background:
-      radial-gradient(ellipse at 50% 20%, var(--purple-light) 0%, var(--purple) 50%, var(--plum-bright) 100%);
+    background: radial-gradient(ellipse at 50% 20%, var(--purple-light) 0%, var(--purple) 50%, var(--plum-bright) 100%);
   }
   .bg-deepest {
-    background:
-      radial-gradient(ellipse at 50% 0%, var(--plum) 0%, var(--deep) 70%);
+    background: radial-gradient(ellipse at 50% 0%, var(--plum) 0%, var(--deep) 70%);
   }
 
-  /* gold sparkle wash overlay on every section */
+  /* sparkle wash */
   section::after {
     content: '';
     position: absolute; inset: 0;
@@ -164,16 +152,6 @@
     margin: 8px 0;
     text-shadow: 0 1px 12px rgba(216, 160, 23, 0.25);
   }
-  .lead {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(17px, 4.4vw, 21px);
-    color: var(--cream);
-    text-align: center;
-    max-width: 580px;
-    margin: 22px auto 0;
-    line-height: 1.5;
-  }
   .body-text {
     font-size: clamp(16px, 4vw, 18px);
     color: var(--cream);
@@ -202,13 +180,7 @@
     box-shadow: 0 0 0 2px var(--plum-mid), 0 0 0 3px var(--gold);
   }
 
-  /* ============== floral ornament ============== */
-  .floral-ornament {
-    width: 80px; height: 60px;
-    margin: 0 auto 14px;
-    color: var(--gold-bright);
-    opacity: 0.85;
-  }
+  .floral-ornament { width: 80px; height: 60px; margin: 0 auto 14px; color: var(--gold-bright); opacity: 0.85; }
   .floral-ornament-lg { width: 140px; height: 100px; margin: 0 auto 18px; }
 
   /* ============================================================
@@ -297,7 +269,6 @@
     padding-left: 6px;
   }
 
-  /* ============== countdown ============== */
   .countdown {
     margin: 32px auto 0;
     display: grid;
@@ -361,8 +332,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 5;
-    background:
-      linear-gradient(135deg, var(--plum-mid) 0%, var(--purple) 100%);
+    background: linear-gradient(135deg, var(--plum-mid) 0%, var(--purple) 100%);
     border: 1px solid var(--gold);
     box-shadow: var(--shadow-card);
     overflow: hidden;
@@ -424,185 +394,7 @@
   }
 
   /* ============================================================
-     DYNAMIC CARDS — all double-bordered like the "final box"
-     ============================================================ */
-  .cards {
-    margin-top: 36px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  @media (min-width: 700px) { .cards { grid-template-columns: 1fr 1fr; } }
-  .card {
-    background: linear-gradient(180deg, rgba(74, 40, 109, 0.45) 0%, rgba(28, 13, 58, 0.55) 100%);
-    border: 1px solid var(--gold-bright);
-    box-shadow: inset 0 0 0 3px rgba(20, 8, 42, 0.6), inset 0 0 0 3.5px var(--gold);
-    padding: 26px 22px 26px;
-    text-align: center;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    position: relative;
-  }
-  .card-icon {
-    width: 36px; height: 36px;
-    margin: 0 auto 10px;
-    color: var(--gold-bright);
-  }
-  .card-title {
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold-pale);
-    margin-bottom: 8px;
-    padding-left: 4px;
-  }
-  .card-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--cream);
-  }
-
-  /* ============================================================
-     QUOTE BLOCKS — also framed like the final box
-     ============================================================ */
-  .quote-block {
-    margin: 32px auto 0;
-    max-width: 600px;
-    text-align: center;
-    padding: 28px 24px;
-    background: linear-gradient(180deg, rgba(74, 40, 109, 0.30) 0%, rgba(28, 13, 58, 0.45) 100%);
-    border: 1px solid var(--gold);
-    box-shadow: inset 0 0 0 3px rgba(20, 8, 42, 0.55), inset 0 0 0 3.5px var(--gold-bright);
-  }
-  .quote-block .quote-mark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px;
-    line-height: 0.5;
-    color: var(--gold-bright);
-    opacity: 0.7;
-    height: 32px;
-  }
-  .quote-block blockquote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(18px, 5vw, 24px);
-    line-height: 1.5;
-    color: var(--gold-pale);
-    margin: 6px 0 14px;
-  }
-  .quote-block cite {
-    font-family: 'Italianno', cursive;
-    font-style: normal;
-    font-size: 28px;
-    color: var(--gold-light);
-  }
-
-  /* ============================================================
-     LOVE LANGUAGES
-     ============================================================ */
-  .languages {
-    margin-top: 36px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  @media (min-width: 720px) { .languages { grid-template-columns: 1fr 1fr 1fr; } }
-  .lang-card {
-    background: linear-gradient(180deg, rgba(74, 40, 109, 0.45) 0%, rgba(28, 13, 58, 0.55) 100%);
-    border: 1px solid var(--gold-bright);
-    box-shadow: inset 0 0 0 4px rgba(20, 8, 42, 0.65), inset 0 0 0 4.5px var(--gold);
-    padding: 28px 22px 24px;
-    text-align: center;
-    position: relative;
-  }
-  .lang-icon {
-    width: 44px; height: 44px;
-    margin: 0 auto 12px;
-    color: var(--gold-bright);
-    filter: drop-shadow(0 2px 8px rgba(216, 160, 23, 0.4));
-  }
-  .lang-title {
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold-pale);
-    margin-bottom: 14px;
-    padding-left: 4px;
-  }
-  .lang-list { list-style: none; text-align: center; }
-  .lang-list li {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--cream);
-    line-height: 2;
-  }
-
-  /* ============================================================
-     VISION LIST
-     ============================================================ */
-  .vision-list {
-    margin: 36px auto 0;
-    max-width: 460px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 20px;
-  }
-  .vision-list li {
-    list-style: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 17px;
-    color: var(--cream);
-    text-align: center;
-    padding: 12px 6px;
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    position: relative;
-  }
-  .vision-list li::before {
-    content: '\2766';
-    color: var(--gold-bright);
-    margin-right: 6px;
-    font-size: 14px;
-    opacity: 0.85;
-  }
-
-  /* ============================================================
-     FUN FACTS
-     ============================================================ */
-  .facts {
-    margin-top: 36px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .fact {
-    background: rgba(74, 40, 109, 0.35);
-    border-left: 3px solid var(--gold-bright);
-    border-right: 1px solid var(--gold);
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 14px 18px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--cream);
-    line-height: 1.5;
-  }
-  .fact em { color: var(--gold-light); }
-
-  /* ============================================================
-     SAVE THE DATE — the centerpiece, full "final box" style
+     SAVE THE DATE — centerpiece
      ============================================================ */
   .save-date {
     margin: 40px auto 0;
@@ -759,7 +551,6 @@
     .scroll-flower, .star-trail { display: none; }
   }
   @media (max-width: 380px) {
-    /* smaller flower on tiny screens, less space */
     .scroll-flower { width: 30px; height: 30px; right: 12px; }
     .star-trail { width: 70px; }
   }
@@ -810,12 +601,11 @@
   </svg>
 </div>
 
-<!-- ============== reusable SVG defs ============== -->
+<!-- reusable SVG defs -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="trail-star" viewBox="0 0 20 20">
-      <path d="M10 1 L 12 7 L 19 8 L 13.5 12 L 15 19 L 10 15 L 5 19 L 6.5 12 L 1 8 L 8 7 Z"
-            fill="currentColor"/>
+      <path d="M10 1 L 12 7 L 19 8 L 13.5 12 L 15 19 L 10 15 L 5 19 L 6.5 12 L 1 8 L 8 7 Z" fill="currentColor"/>
       <circle cx="10" cy="10" r="1.2" fill="#fff5c0"/>
     </symbol>
 
@@ -865,13 +655,11 @@
 
     <symbol id="heart-rose-crest" viewBox="0 0 100 100">
       <g>
-        <!-- crown atop -->
         <g fill="#d4a017" stroke="#3a1d62" stroke-width="0.5">
           <path d="M30 24 L 36 14 L 44 22 L 50 12 L 56 22 L 64 14 L 70 24 Z"/>
           <rect x="30" y="24" width="40" height="3.5"/>
         </g>
         <circle cx="50" cy="12" r="2" fill="#7a55a8" stroke="#d4a017" stroke-width="0.4"/>
-        <!-- laurel arc -->
         <path d="M20 50 Q 28 78, 50 84 Q 72 78, 80 50"
               fill="none" stroke="#7a55a8" stroke-width="0.7" stroke-linecap="round"/>
         <g fill="#7a55a8">
@@ -888,35 +676,15 @@
           <circle cx="33" cy="68" r="1.8" fill="#e8c97a"/>
           <circle cx="67" cy="68" r="1.8" fill="#e8c97a"/>
         </g>
-        <!-- heart -->
         <path d="M50 40 C 46 34, 38 34, 38 42 C 38 50, 50 60, 50 60 C 50 60, 62 50, 62 42 C 62 34, 54 34, 50 40 Z"
               fill="#d4a017" stroke="#3a1d62" stroke-width="0.5"/>
         <path d="M44 40 Q 46 38, 48 40" stroke="#fff5c0" stroke-width="0.6" fill="none" opacity="0.7"/>
-        <!-- initials banner -->
         <g fill="#7a55a8" stroke="#d4a017" stroke-width="0.3">
           <path d="M22 90 Q 18 94, 22 96 L 78 96 Q 82 94, 78 90 Z"/>
         </g>
         <text x="50" y="94.5" font-family="Cinzel" font-weight="700" font-size="4"
               text-anchor="middle" fill="#fff5c0">R &amp; D</text>
       </g>
-    </symbol>
-
-    <symbol id="icon-heart" viewBox="0 0 24 24">
-      <path d="M12 21s-7-4.5-9.5-9C0.7 8.4 2 4 6 4c2 0 3.5 1 4 2.5C10.5 5 12 4 14 4c4 0 5.3 4.4 3.5 8-2.5 4.5-5.5 9-5.5 9z"
-            fill="currentColor"/>
-    </symbol>
-    <symbol id="icon-hand" viewBox="0 0 24 24">
-      <path d="M8 2c0 4 2 4 2 8H6c0 4 2 7 6 7s6-3 6-7c0-3-2-5-4-5-1 0-2 .5-2 1.5C12 6 11 6 11 4c0-1-1-2-3-2z"
-            fill="currentColor"/>
-    </symbol>
-    <symbol id="icon-spark" viewBox="0 0 24 24">
-      <path d="M12 2 L13 10 L21 11 L13 13 L12 22 L11 13 L3 11 L11 10 Z" fill="currentColor"/>
-    </symbol>
-    <symbol id="icon-home" viewBox="0 0 24 24">
-      <path d="M3 11 L12 3 L21 11 V21 H14 V14 H10 V21 H3 Z" fill="currentColor"/>
-    </symbol>
-    <symbol id="icon-talk" viewBox="0 0 24 24">
-      <path d="M3 5 H21 V17 H7 L3 21 Z" fill="currentColor"/>
     </symbol>
   </defs>
 </svg>
@@ -943,113 +711,31 @@
       <div class="countdown-cell"><div class="countdown-num" id="cd-sec">--</div><div class="countdown-label">Sec</div></div>
     </div>
   </div>
-  <div class="scroll-cue" aria-hidden="true">our story below</div>
+  <div class="scroll-cue" aria-hidden="true">scroll</div>
 </header>
 
 <!-- ============================================================
-     OUR STORY
+     WELCOME — short and gracious
      ============================================================ -->
 <section class="bg-plum">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">Chapter One</div>
-    <h2 class="reveal">Our Story</h2>
-    <div class="script reveal">how we became home</div>
+    <div class="eyebrow reveal">An Invitation</div>
+    <h2 class="reveal">With Joy</h2>
+    <div class="script reveal">we can&rsquo;t wait to celebrate with you</div>
     <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
     <div class="body-text reveal">
       <p>
-        Riu (<em>Rinky</em>) and Diu (<em>Deepak</em>) are not just a couple preparing for marriage. They are best friends. Soulmates. Partners. Each other&rsquo;s safest place in the world.
-      </p>
-      <p>
-        Our story isn&rsquo;t built on grand gestures alone. It is built on <em>thousands of conversations</em>, endless understanding, emotional vulnerability, deep trust &mdash; and a love that grew stronger every single day.
-      </p>
-      <p>
-        The wedding is happening in June 2026. But in many ways&hellip; we already feel married.
+        With full hearts and so much gratitude for the people who have walked beside us &mdash; we&rsquo;re saying yes to forever. We would be honoured to have you with us.
       </p>
     </div>
 
     <div class="feature-photo reveal reveal-scale">
-      <div class="photo-frame" data-label="Riu &amp; Diu — together">
-        <img src="images/photo-hero.jpg" alt="Riu &amp; Diu together" onerror="this.style.display='none'"/>
+      <div class="photo-frame" data-label="Riu &amp; Diu">
+        <img src="images/photo-hero.jpg" alt="Riu &amp; Diu" onerror="this.style.display='none'"/>
       </div>
-      <div class="photo-caption">~ the two of us ~</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     OUR DYNAMIC
-     ============================================================ -->
-<section class="bg-plum-mid">
-  <div class="container">
-    <svg class="floral-ornament-lg reveal" viewBox="0 0 200 100"><use href="#rose-flourish-lg"/></svg>
-    <div class="eyebrow reveal">The Many Forms of Us</div>
-    <h2 class="reveal">Our Dynamic</h2>
-    <div class="script reveal">a love with many faces</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="body-text reveal">
-      <p>One of the most unique things about us is how many forms our love takes.</p>
-    </div>
-
-    <div class="cards stagger reveal">
-      <div class="card reveal">
-        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-heart"/></svg>
-        <div class="card-title">Lovers</div>
-        <div class="card-text">Soft, devoted, romantic &mdash; tender even in the smallest of moments.</div>
-      </div>
-      <div class="card reveal">
-        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-talk"/></svg>
-        <div class="card-title">Best Friends</div>
-        <div class="card-text">The kind who can talk about anything &mdash; or nothing &mdash; for hours.</div>
-      </div>
-      <div class="card reveal">
-        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-spark"/></svg>
-        <div class="card-title">Each Other&rsquo;s Biggest Supporters</div>
-        <div class="card-text">Cheering, believing, defending &mdash; every single day, in every single room.</div>
-      </div>
-      <div class="card reveal">
-        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-hand"/></svg>
-        <div class="card-title">Protector &amp; Protected</div>
-        <div class="card-text">Deepak lovingly cares for Rinky like she&rsquo;s the most precious thing in the world &mdash; because she is.</div>
-      </div>
-    </div>
-
-    <div class="quote-block reveal">
-      <div class="quote-mark">&ldquo;</div>
-      <blockquote>I don&rsquo;t want to fix you. I just want to make life softer for you.</blockquote>
-      <cite>&mdash; Deepak</cite>
-    </div>
-    <div class="quote-block reveal">
-      <div class="quote-mark">&ldquo;</div>
-      <blockquote>I pray to God everyday that you get everything in life you want, and I just get you.</blockquote>
-      <cite>&mdash; Rinky</cite>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     WHAT MAKES OUR LOVE UNIQUE
-     ============================================================ -->
-<section class="bg-plum">
-  <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">What Makes Us, Us</div>
-    <h2 class="reveal">We Never Stop Talking</h2>
-    <div class="script reveal">communication, always</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="body-text reveal">
-      <p>We have an unusual level of openness. We talk about everything.</p>
-      <p><em>The beautiful things. The difficult things. The uncomfortable things. The fears. The insecurities. The dreams. The future.</em></p>
-      <p>Even when conflicts happen, communication always wins. Our goal is never to win arguments &mdash; our goal is to understand each other.</p>
-    </div>
-
-    <div class="quote-block reveal">
-      <div class="quote-mark">&ldquo;</div>
-      <blockquote>No matter what happens, we never stop talking.</blockquote>
-      <cite>&mdash; our promise</cite>
+      <div class="photo-caption">~ Riu &amp; Diu ~</div>
     </div>
   </div>
 </section>
@@ -1057,199 +743,33 @@
 <!-- ============================================================
      GALLERY
      ============================================================ -->
-<section class="bg-purple">
+<section class="bg-plum-mid">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">Moments of Us</div>
+    <div class="eyebrow reveal">Moments</div>
     <h2 class="reveal">Through the Days</h2>
-    <div class="script reveal">a thousand little forevers</div>
+    <div class="script reveal">a few of our favourite frames</div>
     <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
     <div class="gallery stagger reveal">
-      <div class="photo-frame reveal" data-label="First photo together">
+      <div class="photo-frame reveal" data-label="us">
         <img src="images/photo-1.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
-      <div class="photo-frame reveal" data-label="That smile">
+      <div class="photo-frame reveal" data-label="together">
         <img src="images/photo-2.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
-      <div class="photo-frame reveal full" data-label="A whole afternoon, just us">
+      <div class="photo-frame reveal full" data-label="a quiet afternoon">
         <img src="images/photo-3.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
-      <div class="photo-frame reveal" data-label="Late-night calls became this">
+      <div class="photo-frame reveal" data-label="love">
         <img src="images/photo-4.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
-      <div class="photo-frame reveal" data-label="Found home in you">
+      <div class="photo-frame reveal" data-label="always">
         <img src="images/photo-5.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
-      <div class="photo-frame reveal" data-label="A future together">
+      <div class="photo-frame reveal" data-label="forever">
         <img src="images/photo-6.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     HE SAYS / SHE SAYS
-     ============================================================ -->
-<section class="bg-plum">
-  <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">In His Words</div>
-    <h2 class="reveal">How He Sees Her</h2>
-    <div class="script reveal">beauty took human form</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="feature-photo reveal reveal-left">
-      <div class="photo-frame square" data-label="Rinky">
-        <img src="images/portrait-rinky.jpg" alt="Rinky" onerror="this.style.display='none'"/>
-      </div>
-      <div class="photo-caption">~ Rinky ~</div>
-    </div>
-
-    <div class="body-text reveal">
-      <p>
-        Deepak genuinely believes Rinky is one of the kindest human beings he has ever met. He sees her as <em>gentle, compassionate, loving, loyal, emotionally strong &mdash; beautiful inside and out.</em>
-      </p>
-      <p>
-        But what he admires most is not her appearance. It is her <em>heart.</em> He believes she remained kind despite life giving her every reason not to be.
-      </p>
-    </div>
-
-    <div class="quote-block reveal">
-      <div class="quote-mark">&ldquo;</div>
-      <blockquote>Beauty must have taken human form.</blockquote>
-      <cite>&mdash; Deepak, about Rinky</cite>
-    </div>
-    <div class="quote-block reveal">
-      <div class="quote-mark">&ldquo;</div>
-      <blockquote>You deserved gentleness all along.</blockquote>
-      <cite>&mdash; Deepak, to Rinky</cite>
-    </div>
-  </div>
-</section>
-
-<section class="bg-plum-mid">
-  <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">In Her Words</div>
-    <h2 class="reveal">How She Sees Him</h2>
-    <div class="script reveal">he is my home</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="feature-photo reveal reveal-right">
-      <div class="photo-frame square" data-label="Deepak">
-        <img src="images/portrait-deepak.jpg" alt="Deepak" onerror="this.style.display='none'"/>
-      </div>
-      <div class="photo-caption">~ Deepak ~</div>
-    </div>
-
-    <div class="body-text reveal">
-      <p>
-        Rinky sees Deepak as her <em>home.</em> Her strength. Her protector. Her safest place. Someone who loves her without conditions. Someone who accepts her entirely.
-      </p>
-      <p>
-        She knows his love is <em>fierce, loyal, protective, and unwavering.</em>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     LOVE LANGUAGES
-     ============================================================ -->
-<section class="bg-plum">
-  <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">How We Love</div>
-    <h2 class="reveal">Our Love Languages</h2>
-    <div class="script reveal">three ways our hearts speak</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="languages stagger reveal">
-      <div class="lang-card reveal">
-        <svg class="lang-icon" viewBox="0 0 24 24"><use href="#icon-heart"/></svg>
-        <div class="lang-title">Emotional Presence</div>
-        <ul class="lang-list">
-          <li>Being there.</li>
-          <li>Listening.</li>
-          <li>Understanding.</li>
-          <li>Supporting.</li>
-          <li>Comforting.</li>
-        </ul>
-      </div>
-      <div class="lang-card reveal">
-        <svg class="lang-icon" viewBox="0 0 24 24"><use href="#icon-hand"/></svg>
-        <div class="lang-title">Physical Affection</div>
-        <ul class="lang-list">
-          <li>Holding hands.</li>
-          <li>Cuddles.</li>
-          <li>Hugs.</li>
-          <li>Playfulness.</li>
-          <li>Feeling close.</li>
-        </ul>
-      </div>
-      <div class="lang-card reveal">
-        <svg class="lang-icon" viewBox="0 0 24 24"><use href="#icon-talk"/></svg>
-        <div class="lang-title">Words</div>
-        <ul class="lang-list">
-          <li>Long emotional letters.</li>
-          <li>Thoughtful messages.</li>
-          <li>Daily affirmations.</li>
-          <li>Expressions of gratitude.</li>
-          <li>Deep conversations.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     OUR VISION OF MARRIAGE
-     ============================================================ -->
-<section class="bg-plum-mid">
-  <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">What We Dream Of</div>
-    <h2 class="reveal">Ordinary Happiness</h2>
-    <div class="script reveal">the small things, forever</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="body-text reveal">
-      <p>For us, marriage is not a finish line. It is the beginning of <em>peace.</em></p>
-      <p>Neither of us dreams of perfection. We dream of <em>ordinary happiness.</em></p>
-    </div>
-
-    <ul class="vision-list stagger reveal">
-      <li class="reveal">Morning tea together</li>
-      <li class="reveal">Grocery shopping</li>
-      <li class="reveal">Movie nights</li>
-      <li class="reveal">Weekend walks</li>
-      <li class="reveal">Building a home</li>
-      <li class="reveal">Cooking together</li>
-      <li class="reveal">Raising children</li>
-      <li class="reveal">Growing old together</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================================================
-     FUN FACTS
-     ============================================================ -->
-<section class="bg-plum">
-  <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">Little Things About Us</div>
-    <h2 class="reveal">Fun Facts</h2>
-    <div class="script reveal">the smaller truths</div>
-    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <div class="facts stagger reveal">
-      <div class="fact reveal">Our nicknames are <em>Riu &amp; Diu</em>.</div>
-      <div class="fact reveal">We text constantly &mdash; from the most mundane to the most meaningful.</div>
-      <div class="fact reveal">Deepak writes emotional countdown letters leading up to the wedding.</div>
-      <div class="fact reveal">We are both deeply sentimental and unapologetically hopeless romantics.</div>
-      <div class="fact reveal">We believe love is shown in everyday actions, not just grand gestures.</div>
-      <div class="fact reveal">Both of us believe we are unbelievably lucky to have found each other.</div>
     </div>
   </div>
 </section>
@@ -1280,14 +800,14 @@
 <section class="bg-deepest">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
-    <div class="eyebrow reveal">In One Sentence</div>
+    <div class="eyebrow reveal">With Love</div>
     <h2 class="reveal">Home</h2>
     <div class="script reveal">we found it in each other</div>
     <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
     <div class="closing-quote reveal reveal-scale">
       <p class="text">
-        After everything life taught them separately, they found peace, safety, friendship, and forever in each other. <span class="heart">&hearts;</span>
+        Thank you for being part of our story. We can&rsquo;t wait to see you there. <span class="heart">&hearts;</span>
       </p>
       <div class="sig">Riu &amp; Diu</div>
     </div>
@@ -1358,23 +878,19 @@
     var MAX_STARS = 24;
     var ticking = false;
 
-    // Build a star DOM element
     function makeStar(docY, xOffset, size) {
       var el = document.createElement('div');
       el.className = 'trail-star';
       el.style.top = (docY - size / 2) + 'px';
-      // we anchor stars to right side, with horizontal wiggle based on xOffset
       el.style.right = (40 - xOffset) + 'px';
       el.style.width = size + 'px';
       el.style.height = size + 'px';
       el.innerHTML = '<svg viewBox="0 0 20 20"><use href="#trail-star"/></svg>';
       trail.appendChild(el);
       stars.push(el);
-      // After animation finishes, ease to lower opacity but keep it
       setTimeout(function () {
         if (el.parentNode) el.style.opacity = '0.55';
       }, 1400);
-      // Cap total stars so DOM doesn't grow forever
       if (stars.length > MAX_STARS) {
         var oldest = stars.shift();
         if (oldest && oldest.parentNode) oldest.parentNode.removeChild(oldest);
@@ -1388,16 +904,13 @@
         var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
         var progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
 
-        // Flower descends from near top (80px) to near bottom of viewport (vh - 120)
         var viewportH = window.innerHeight;
         var flowerY = 80 + progress * (viewportH - 200);
 
-        // Curly horizontal wiggle — 8 oscillations over full scroll
         var wiggle = Math.sin(progress * Math.PI * 8) * 26;
         flower.style.top = flowerY + 'px';
         flower.style.transform = 'translateX(' + wiggle + 'px)';
 
-        // Drop a star every ~70px of scroll
         var docY = window.scrollY + flowerY;
         if (Math.abs(docY - lastStarDocY) > 70) {
           var size = 10 + Math.random() * 6;
