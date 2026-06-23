@@ -1518,6 +1518,8 @@
     if (!audio || !btn) return;
 
     audio.volume = 0.6;
+    audio.muted = true;
+    var unmuted = false;
 
     function setIcon(audible) {
       if (audible) {
@@ -1530,48 +1532,61 @@
         btn.classList.add('muted');
       }
     }
+    setIcon(false);
+    btn.classList.add('needs-attention');
 
-    setIcon(false);                      // start showing the muted icon
-    btn.classList.add('needs-attention'); // pulse to invite tap
-
-    // make sure muted-autoplay is actually rolling (it almost always is — HTML
-    // attribute handles it — but kick it just in case)
-    var p = audio.play();
-    if (p && typeof p.catch === 'function') p.catch(function () {});
-
-    // Unmute on the very first interaction of any kind
-    function unmuteOnFirstTouch() {
-      audio.muted = false;
-      // if autoplay was outright blocked (rare), this also kicks playback
+    // Kick muted autoplay aggressively from JS in case the HTML attribute didn't take
+    function kickPlay() {
       var p = audio.play();
-      if (p && typeof p.catch === 'function') p.catch(function () {});
+      if (p && p.catch) p.catch(function () {});
+    }
+    kickPlay();
+    // Some browsers (iOS) only honour autoplay after metadata loads
+    audio.addEventListener('loadedmetadata', kickPlay, { once: true });
+    audio.addEventListener('canplay',        kickPlay, { once: true });
+
+    function doUnmute() {
+      if (unmuted) return;
+      unmuted = true;
+      audio.muted = false;
+      kickPlay();
       btn.classList.remove('needs-attention');
       setIcon(true);
       cleanup();
     }
     function cleanup() {
-      document.removeEventListener('click',      unmuteOnFirstTouch, true);
-      document.removeEventListener('touchstart', unmuteOnFirstTouch, true);
-      document.removeEventListener('keydown',    unmuteOnFirstTouch, true);
-      document.removeEventListener('scroll',     unmuteOnFirstTouch, true);
-      document.removeEventListener('pointerdown',unmuteOnFirstTouch, true);
+      document.removeEventListener('click',       onAnyInteract, true);
+      document.removeEventListener('touchstart',  onAnyInteract, true);
+      document.removeEventListener('touchend',    onAnyInteract, true);
+      document.removeEventListener('keydown',     onAnyInteract, true);
+      document.removeEventListener('pointerdown', onAnyInteract, true);
+      document.removeEventListener('scroll',      onAnyInteract, true);
     }
-    var opts = { capture: true, once: true };
-    document.addEventListener('click',       unmuteOnFirstTouch, opts);
-    document.addEventListener('touchstart',  unmuteOnFirstTouch, opts);
-    document.addEventListener('keydown',     unmuteOnFirstTouch, opts);
-    document.addEventListener('pointerdown', unmuteOnFirstTouch, opts);
-    document.addEventListener('scroll', unmuteOnFirstTouch, { capture: true, once: true, passive: true });
+    function onAnyInteract(e) {
+      // If the user tapped the music button, let the button's own handler take charge.
+      // This prevents a double-fire that would re-mute the audio.
+      if (e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
+      doUnmute();
+    }
+    document.addEventListener('click',       onAnyInteract, true);
+    document.addEventListener('touchstart',  onAnyInteract, true);
+    document.addEventListener('touchend',    onAnyInteract, true);
+    document.addEventListener('keydown',     onAnyInteract, true);
+    document.addEventListener('pointerdown', onAnyInteract, true);
+    document.addEventListener('scroll',      onAnyInteract, true);
 
-    // Manual toggle (mute / unmute — never actually pauses, so it picks up where it left off)
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       btn.classList.remove('needs-attention');
-      cleanup(); // user explicitly chose, drop the auto-unmute listeners
-      if (audio.muted || audio.paused) {
+      if (!unmuted) {
+        // First-ever click happens to be the music button itself: just unmute.
+        doUnmute();
+        return;
+      }
+      // Subsequent clicks: toggle mute
+      if (audio.muted) {
         audio.muted = false;
-        var p = audio.play();
-        if (p && typeof p.catch === 'function') p.catch(function () {});
+        kickPlay();
         setIcon(true);
       } else {
         audio.muted = true;
