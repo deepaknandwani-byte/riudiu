@@ -831,6 +831,58 @@
   footer .heart-big { color: var(--heart); }
 
   /* ============================================================
+     MUSIC TOGGLE
+     ============================================================ */
+  .music-toggle {
+    position: fixed;
+    bottom: 22px;
+    left: 22px;
+    z-index: 70;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: 2px solid var(--plum);
+    color: var(--plum);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(20, 8, 42, 0.45), 0 0 0 0 rgba(216, 160, 23, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .music-toggle:hover { transform: scale(1.08); }
+  .music-toggle:active { transform: scale(0.94); }
+  .music-toggle svg { width: 22px; height: 22px; pointer-events: none; }
+  .music-toggle.muted {
+    background: linear-gradient(180deg, rgba(74, 40, 109, 0.85), rgba(20, 8, 42, 0.9));
+    color: var(--gold-light);
+    border-color: var(--gold);
+  }
+  .music-toggle.needs-attention {
+    animation: musicPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes musicPulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(20, 8, 42, 0.45), 0 0 0 0 rgba(216, 160, 23, 0.6); }
+    50%      { box-shadow: 0 4px 20px rgba(20, 8, 42, 0.5),  0 0 0 12px rgba(216, 160, 23, 0); }
+  }
+  .music-toggle .spinning-note {
+    transform-origin: center;
+    animation: noteSpin 6s linear infinite;
+  }
+  .music-toggle.muted .spinning-note { animation: none; }
+  @keyframes noteSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @media (max-width: 380px) {
+    .music-toggle { bottom: 16px; left: 16px; width: 42px; height: 42px; }
+    .music-toggle svg { width: 19px; height: 19px; }
+  }
+
+  /* ============================================================
      SCROLL TRAIL — flower that follows scroll, star trail behind
      ============================================================ */
   .scroll-flower {
@@ -896,6 +948,32 @@
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     BACKGROUND MUSIC
+     ============================================================ -->
+<audio id="bgMusic" loop preload="auto" playsinline>
+  <source src="audio/ordinary.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-toggle needs-attention" id="musicToggle"
+        type="button" aria-label="Toggle background music">
+  <!-- music note (playing state) -->
+  <svg id="musicIconOn" viewBox="0 0 24 24" fill="currentColor">
+    <g class="spinning-note">
+      <path d="M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3zm0-15v12a3 3 0 1 0 2 2.83V6h8V3z"/>
+    </g>
+  </svg>
+  <!-- muted icon -->
+  <svg id="musicIconOff" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round"
+       style="display:none">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/>
+    <line x1="23" y1="9" x2="17" y2="15"/>
+    <line x1="17" y1="9" x2="23" y2="15"/>
+  </svg>
+</button>
 
 <!-- ============================================================
      SCROLL FLOWER + STAR TRAIL
@@ -1429,6 +1507,81 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+
+  // -------- Background music with smart autoplay fallback --------
+  (function () {
+    var audio = document.getElementById('bgMusic');
+    var btn = document.getElementById('musicToggle');
+    var iconOn = document.getElementById('musicIconOn');
+    var iconOff = document.getElementById('musicIconOff');
+    if (!audio || !btn) return;
+
+    audio.volume = 0.5;
+
+    function setIcon(playing) {
+      if (playing) {
+        iconOn.style.display = 'block';
+        iconOff.style.display = 'none';
+        btn.classList.remove('muted');
+      } else {
+        iconOn.style.display = 'none';
+        iconOff.style.display = 'block';
+        btn.classList.add('muted');
+      }
+    }
+
+    function tryPlay() {
+      var p = audio.play();
+      if (p && typeof p.then === 'function') {
+        return p.then(function () {
+          btn.classList.remove('needs-attention');
+          setIcon(true);
+        });
+      }
+      btn.classList.remove('needs-attention');
+      setIcon(true);
+      return Promise.resolve();
+    }
+
+    // attempt autoplay on load
+    tryPlay().catch(function () {
+      // browser blocked it — start the pulse and wait for any interaction
+      btn.classList.add('needs-attention');
+      setIcon(false);
+
+      function resumeOnInteraction() {
+        tryPlay().then(function () {
+          cleanup();
+        }).catch(function () { /* still blocked — toggle button works */ });
+      }
+      function cleanup() {
+        document.removeEventListener('click', resumeOnInteraction, true);
+        document.removeEventListener('touchstart', resumeOnInteraction, true);
+        document.removeEventListener('keydown', resumeOnInteraction, true);
+        document.removeEventListener('scroll', resumeOnInteraction, true);
+      }
+      document.addEventListener('click', resumeOnInteraction, { capture: true, once: true });
+      document.addEventListener('touchstart', resumeOnInteraction, { capture: true, once: true });
+      document.addEventListener('keydown', resumeOnInteraction, { capture: true, once: true });
+      document.addEventListener('scroll', resumeOnInteraction, { capture: true, once: true, passive: true });
+    });
+
+    // manual toggle
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      btn.classList.remove('needs-attention');
+      if (audio.paused) {
+        tryPlay().catch(function () {});
+      } else {
+        audio.pause();
+        setIcon(false);
+      }
+    });
+
+    audio.addEventListener('play',  function () { setIcon(true); });
+    audio.addEventListener('pause', function () { setIcon(false); });
+    audio.addEventListener('ended', function () { setIcon(false); });
   })();
 
   // -------- Varmala ceremony game (retro pixel) --------
