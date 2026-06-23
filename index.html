@@ -1420,8 +1420,8 @@
       <!-- celebration overlay -->
       <div class="petals-burst" id="petalsBurst"></div>
       <div class="game-banner" id="gameBanner">
-        <span class="big">Bow Ho Gaya!</span>
-        <span class="sub">&hearts; Mr &amp; Mrs Nandwani &hearts;</span>
+        <span class="big">Mubarak Ho!</span>
+        <span class="sub">&hearts; level complete &hearts;</span>
       </div>
 
       <!-- ============ DULHA (groom) — pixel sprite ============ -->
@@ -1652,7 +1652,7 @@
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   })();
 
-  // -------- Entry splash + background music --------
+  // -------- Entry splash + background music (robust) --------
   (function () {
     var splash = document.getElementById('entrySplash');
     var audio  = document.getElementById('bgMusic');
@@ -1677,69 +1677,107 @@
     }
     setIcon(false);
 
-    function kickPlay() {
-      var p = audio.play();
-      if (p && p.catch) p.catch(function () {});
+    // Force the browser to start downloading the file ASAP — preload="auto"
+    // is a hint, but .load() makes it explicit.
+    try { audio.load(); } catch (_) {}
+
+    function isAudible() {
+      return !audio.paused && !audio.muted;
+    }
+
+    function attemptPlay(onSuccess, onFailure) {
+      // We must call .play() synchronously inside a user gesture for iOS.
+      audio.muted = false;
+      audio.volume = 0.6;
+      var p;
+      try { p = audio.play(); } catch (err) { onFailure && onFailure(err); return; }
+      if (p && typeof p.then === 'function') {
+        p.then(function () { onSuccess && onSuccess(); })
+         .catch(function (err) { onFailure && onFailure(err); });
+      } else {
+        // legacy: no Promise returned — assume started
+        onSuccess && onSuccess();
+      }
+    }
+
+    function hideSplash() {
+      if (!splash) return;
+      splash.classList.add('hidden');
+      document.body.classList.remove('splash-locked');
+      setTimeout(function () {
+        if (splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 800);
+    }
+
+    function markPlayingOK() {
+      btn.classList.remove('needs-attention');
+      setIcon(true);
+    }
+
+    function markPlayingFailed() {
+      // Audio didn't actually start; flag the button strongly so the user
+      // can manually start it from the floating control.
+      btn.classList.add('needs-attention');
+      setIcon(false);
     }
 
     function enter() {
       if (entered) return;
       entered = true;
-      // unmute + play (we are inside a user gesture, so this is allowed)
-      audio.muted = false;
-      kickPlay();
-      setIcon(true);
-      btn.classList.remove('needs-attention');
-      // fade splash away
-      if (splash) {
-        splash.classList.add('hidden');
-        document.body.classList.remove('splash-locked');
+      hideSplash();        // good UX — splash goes away immediately
+      attemptPlay(markPlayingOK, function (err) {
+        // First try failed. Try once more — sometimes iOS needs a re-tickle
+        // after the audio gets a chance to buffer.
         setTimeout(function () {
-          if (splash.parentNode) splash.parentNode.removeChild(splash);
-        }, 800);
-      }
+          attemptPlay(markPlayingOK, markPlayingFailed);
+        }, 250);
+      });
     }
 
-    // Lock body scroll until they tap "enter"
+    // Splash listeners
     if (splash) {
       document.body.classList.add('splash-locked');
       splash.addEventListener('click', enter);
-      splash.addEventListener('touchstart', function (e) { e.preventDefault(); enter(); }, { passive: false });
+      splash.addEventListener('touchend', function (e) { e.preventDefault(); enter(); }, { passive: false });
       splash.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') enter();
       });
     } else {
-      // no splash present — fall back to "any interaction unmutes"
+      // No splash — fall back to any-interaction unmute
       audio.muted = true;
-      kickPlay();
+      try { audio.play().catch(function () {}); } catch (_) {}
       btn.classList.add('needs-attention');
       var anyInteract = function (e) {
         if (e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
         enter();
       };
       document.addEventListener('click',      anyInteract, { capture: true, once: true });
-      document.addEventListener('touchstart', anyInteract, { capture: true, once: true });
+      document.addEventListener('touchend',   anyInteract, { capture: true, once: true });
       document.addEventListener('scroll',     anyInteract, { capture: true, once: true, passive: true });
     }
 
-    // Manual mute/unmute via the floating button
+    // Manual toggle button
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       btn.classList.remove('needs-attention');
       if (!entered) { enter(); return; }
-      if (audio.muted) {
-        audio.muted = false;
-        kickPlay();
-        setIcon(true);
+      // Use audible state (not just muted) so a failed-but-not-paused state is
+      // also treated as "needs play"
+      if (!isAudible()) {
+        attemptPlay(markPlayingOK, markPlayingFailed);
       } else {
         audio.muted = true;
         setIcon(false);
       }
     });
 
-    audio.addEventListener('volumechange', function () { setIcon(!audio.muted); });
-    audio.addEventListener('play',  function () { if (!audio.muted) setIcon(true); });
-    audio.addEventListener('pause', function () { setIcon(false); });
+    // Sync the icon with whatever the audio element is actually doing
+    audio.addEventListener('playing',      function () { setIcon(!audio.muted); btn.classList.remove('needs-attention'); });
+    audio.addEventListener('volumechange', function () { setIcon(isAudible()); });
+    audio.addEventListener('pause',        function () { setIcon(false); });
+    audio.addEventListener('ended',        function () { setIcon(false); });
+    // If something goes wrong loading the audio, surface it via the button
+    audio.addEventListener('error',        function () { markPlayingFailed(); });
   })();
 
   // -------- Varmala ceremony game (retro pixel) --------
@@ -1797,7 +1835,7 @@
       animateScore(0, 9999, 1400);
       setTimeout(function () {
         stage.classList.add('ceremony-done');
-        msg.innerHTML = '&gt; level complete &lt; <span class="heart">&hearts;</span> bow ho gaya <span class="heart">&hearts;</span>';
+        msg.innerHTML = '&gt; level complete &lt; <span class="heart">&hearts;</span> mubarak ho <span class="heart">&hearts;</span>';
         btn.textContent = '↻ Play Again';
         btn.disabled = false;
         done = true;
