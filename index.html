@@ -831,6 +831,122 @@
   footer .heart-big { color: var(--heart); }
 
   /* ============================================================
+     ENTRY SPLASH — full-screen tap-to-enter overlay
+     ============================================================ */
+  .entry-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background:
+      radial-gradient(ellipse at 50% 38%, var(--purple-light) 0%, var(--purple) 30%, var(--plum-bright) 60%, var(--plum) 85%, var(--deep) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 28px;
+    cursor: pointer;
+    transition: opacity 0.7s cubic-bezier(.3,.2,.4,1), visibility 0s linear 0.7s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .entry-splash::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 14% 22%, rgba(216, 160, 23, 0.20) 0%, transparent 30%),
+      radial-gradient(circle at 86% 78%, rgba(216, 160, 23, 0.18) 0%, transparent 30%),
+      radial-gradient(2px 1.5px at 22% 18%, rgba(245, 211, 110, 0.75), transparent 51%),
+      radial-gradient(1.5px 1.2px at 78% 22%, rgba(245, 211, 110, 0.55), transparent 51%),
+      radial-gradient(2px 1.5px at 30% 70%, rgba(245, 211, 110, 0.6), transparent 51%),
+      radial-gradient(1.8px 1.4px at 68% 80%, rgba(245, 211, 110, 0.55), transparent 51%),
+      radial-gradient(1.5px 1.2px at 14% 86%, rgba(245, 211, 110, 0.4), transparent 51%);
+    pointer-events: none;
+  }
+  .entry-splash.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .entry-splash > * { position: relative; z-index: 2; }
+  .entry-splash .splash-crest {
+    width: 110px; height: 110px;
+    color: var(--gold-bright);
+    filter: drop-shadow(0 4px 18px rgba(216, 160, 23, 0.45));
+    animation: splashFloat 4s ease-in-out infinite;
+  }
+  @keyframes splashFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .entry-splash .splash-tag {
+    margin-top: 22px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 8px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    padding-left: 8px;
+  }
+  .entry-splash .splash-names {
+    margin-top: 14px;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 9vw, 56px);
+    color: var(--gold-pale);
+    letter-spacing: 4px;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 0 2px 20px rgba(216, 160, 23, 0.4);
+  }
+  .entry-splash .splash-and {
+    display: block;
+    font-family: 'Italianno', cursive;
+    font-weight: 400;
+    font-size: clamp(36px, 10vw, 52px);
+    color: var(--gold-bright);
+    margin: -2px 0;
+    text-transform: none;
+    line-height: 1;
+    text-shadow: 0 2px 14px rgba(216, 160, 23, 0.5);
+  }
+  .entry-splash .tap-prompt {
+    margin-top: 40px;
+    font-family: 'Italianno', cursive;
+    font-size: clamp(30px, 7vw, 42px);
+    color: var(--gold-light);
+    line-height: 1;
+    animation: tapPulse 1.6s ease-in-out infinite;
+  }
+  .entry-splash .tap-prompt .px-heart {
+    display: inline-block;
+    margin: 0 6px;
+    color: var(--rose-accent);
+  }
+  @keyframes tapPulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.05); }
+  }
+  .entry-splash .splash-hint {
+    margin-top: 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--gold-light);
+    opacity: 0.65;
+    text-transform: uppercase;
+    padding-left: 5px;
+  }
+  .entry-splash .ornament {
+    width: 140px;
+    height: 22px;
+    margin: 28px 0 10px;
+    color: var(--gold);
+    opacity: 0.85;
+  }
+  /* lock body scroll while splash is up */
+  body.splash-locked { overflow: hidden; }
+
+  /* ============================================================
      MUSIC TOGGLE
      ============================================================ */
   .music-toggle {
@@ -948,6 +1064,33 @@
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     ENTRY SPLASH — tap-to-enter, also unlocks audio
+     ============================================================ -->
+<div class="entry-splash" id="entrySplash" role="button"
+     tabindex="0" aria-label="Tap to enter">
+  <svg class="splash-crest" viewBox="0 0 100 100"><use href="#heart-rose-crest"/></svg>
+  <div class="splash-tag">A Royal Wedding</div>
+  <div class="splash-names">
+    Rinky
+    <span class="splash-and">&amp;</span>
+    Deepak
+  </div>
+  <svg class="ornament" viewBox="0 0 200 24">
+    <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+      <path d="M5 12 Q 50 4, 95 12"/>
+      <path d="M105 12 Q 150 20, 195 12"/>
+    </g>
+    <circle cx="100" cy="12" r="3" fill="currentColor"/>
+  </svg>
+  <div class="tap-prompt">
+    <span class="px-heart">&hearts;</span>
+    tap to enter
+    <span class="px-heart">&hearts;</span>
+  </div>
+  <div class="splash-hint">music will play</div>
+</div>
 
 <!-- ============================================================
      BACKGROUND MUSIC
@@ -1509,17 +1652,17 @@
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   })();
 
-  // -------- Background music: muted autoplay → unmute on first interaction --------
+  // -------- Entry splash + background music --------
   (function () {
-    var audio = document.getElementById('bgMusic');
-    var btn = document.getElementById('musicToggle');
+    var splash = document.getElementById('entrySplash');
+    var audio  = document.getElementById('bgMusic');
+    var btn    = document.getElementById('musicToggle');
     var iconOn = document.getElementById('musicIconOn');
-    var iconOff = document.getElementById('musicIconOff');
+    var iconOff= document.getElementById('musicIconOff');
     if (!audio || !btn) return;
 
     audio.volume = 0.6;
-    audio.muted = true;
-    var unmuted = false;
+    var entered = false;
 
     function setIcon(audible) {
       if (audible) {
@@ -1533,57 +1676,57 @@
       }
     }
     setIcon(false);
-    btn.classList.add('needs-attention');
 
-    // Kick muted autoplay aggressively from JS in case the HTML attribute didn't take
     function kickPlay() {
       var p = audio.play();
       if (p && p.catch) p.catch(function () {});
     }
-    kickPlay();
-    // Some browsers (iOS) only honour autoplay after metadata loads
-    audio.addEventListener('loadedmetadata', kickPlay, { once: true });
-    audio.addEventListener('canplay',        kickPlay, { once: true });
 
-    function doUnmute() {
-      if (unmuted) return;
-      unmuted = true;
+    function enter() {
+      if (entered) return;
+      entered = true;
+      // unmute + play (we are inside a user gesture, so this is allowed)
       audio.muted = false;
       kickPlay();
-      btn.classList.remove('needs-attention');
       setIcon(true);
-      cleanup();
+      btn.classList.remove('needs-attention');
+      // fade splash away
+      if (splash) {
+        splash.classList.add('hidden');
+        document.body.classList.remove('splash-locked');
+        setTimeout(function () {
+          if (splash.parentNode) splash.parentNode.removeChild(splash);
+        }, 800);
+      }
     }
-    function cleanup() {
-      document.removeEventListener('click',       onAnyInteract, true);
-      document.removeEventListener('touchstart',  onAnyInteract, true);
-      document.removeEventListener('touchend',    onAnyInteract, true);
-      document.removeEventListener('keydown',     onAnyInteract, true);
-      document.removeEventListener('pointerdown', onAnyInteract, true);
-      document.removeEventListener('scroll',      onAnyInteract, true);
-    }
-    function onAnyInteract(e) {
-      // If the user tapped the music button, let the button's own handler take charge.
-      // This prevents a double-fire that would re-mute the audio.
-      if (e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
-      doUnmute();
-    }
-    document.addEventListener('click',       onAnyInteract, true);
-    document.addEventListener('touchstart',  onAnyInteract, true);
-    document.addEventListener('touchend',    onAnyInteract, true);
-    document.addEventListener('keydown',     onAnyInteract, true);
-    document.addEventListener('pointerdown', onAnyInteract, true);
-    document.addEventListener('scroll',      onAnyInteract, true);
 
+    // Lock body scroll until they tap "enter"
+    if (splash) {
+      document.body.classList.add('splash-locked');
+      splash.addEventListener('click', enter);
+      splash.addEventListener('touchstart', function (e) { e.preventDefault(); enter(); }, { passive: false });
+      splash.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') enter();
+      });
+    } else {
+      // no splash present — fall back to "any interaction unmutes"
+      audio.muted = true;
+      kickPlay();
+      btn.classList.add('needs-attention');
+      var anyInteract = function (e) {
+        if (e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
+        enter();
+      };
+      document.addEventListener('click',      anyInteract, { capture: true, once: true });
+      document.addEventListener('touchstart', anyInteract, { capture: true, once: true });
+      document.addEventListener('scroll',     anyInteract, { capture: true, once: true, passive: true });
+    }
+
+    // Manual mute/unmute via the floating button
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       btn.classList.remove('needs-attention');
-      if (!unmuted) {
-        // First-ever click happens to be the music button itself: just unmute.
-        doUnmute();
-        return;
-      }
-      // Subsequent clicks: toggle mute
+      if (!entered) { enter(); return; }
       if (audio.muted) {
         audio.muted = false;
         kickPlay();
@@ -1595,6 +1738,8 @@
     });
 
     audio.addEventListener('volumechange', function () { setIcon(!audio.muted); });
+    audio.addEventListener('play',  function () { if (!audio.muted) setIcon(true); });
+    audio.addEventListener('pause', function () { setIcon(false); });
   })();
 
   // -------- Varmala ceremony game (retro pixel) --------
