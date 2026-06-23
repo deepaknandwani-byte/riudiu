@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-<meta name="theme-color" content="#fde7e1" />
+<meta name="theme-color" content="#15082a" />
 <title>Riu &amp; Diu &middot; Two Hearts, One Home</title>
 <meta name="description" content="The wedding of Rinky &amp; Deepak — June 28-29, 2026. After everything life taught them separately, they found home in each other." />
 
@@ -14,38 +14,46 @@
 <style>
   /* ============================================================
      RIU & DIU — wedding one-pager
-     Theme: royal-rose, white-pink, floral, scroll-revealed
+     Theme: Vistara-inspired purple + gold, mood-rich royal
      ============================================================ */
 
   :root {
-    --cream: #fef7f3;
-    --cream-deep: #fde7e1;
-    --blush: #f8d4cb;
-    --blush-deep: #f0b8b0;
-    --rose: #c98a73;
-    --rose-deep: #b76e79;
-    --wine: #5a1f3a;
-    --wine-deep: #3a0f24;
-    --gold: #d4a017;
+    /* purples */
+    --deep: #0e0520;
+    --plum: #1c0d3a;
+    --plum-mid: #2b1453;
+    --plum-bright: #3a1d62;
+    --purple: #4b286d;
+    --purple-light: #5d3a85;
+    --purple-hi: #7a55a8;
+
+    /* golds */
+    --gold: #b89968;
+    --gold-bright: #d4a017;
     --gold-light: #e8c97a;
     --gold-pale: #f5e3b8;
-    --sage: #7a8b6f;
-    --sage-deep: #5a6b50;
-    --ink: #4a1f2a;
-    --soft-ink: #6b3a48;
-    --heart: #c8385a;
 
-    --shadow-soft: 0 6px 24px rgba(120, 50, 60, 0.10);
-    --shadow-card: 0 12px 36px rgba(120, 50, 60, 0.14);
-    --shadow-lift: 0 24px 60px rgba(120, 50, 60, 0.18);
+    /* warm text */
+    --cream: #f5e9d0;
+    --ivory: #fde9c8;
+    --soft-cream: #d8c5a8;
+    --muted: #a8957c;
+
+    /* accents */
+    --rose-accent: #d4546e;
+    --heart: #d4a017;
+
+    --shadow-soft: 0 6px 24px rgba(20, 8, 40, 0.40);
+    --shadow-card: 0 12px 36px rgba(20, 8, 40, 0.55);
+    --shadow-lift: 0 24px 60px rgba(20, 8, 40, 0.65);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--cream);
-    color: var(--ink);
+    background: var(--deep);
+    color: var(--cream);
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 17px;
     line-height: 1.65;
@@ -55,9 +63,9 @@
 
   img { max-width: 100%; height: auto; display: block; }
 
-  ::selection { background: var(--rose-deep); color: #fff; }
+  ::selection { background: var(--gold); color: var(--deep); }
 
-  /* ============== shared reveal animations ============== */
+  /* ============== reveal animations ============== */
   .reveal {
     opacity: 0;
     transform: translateY(28px);
@@ -70,7 +78,6 @@
   .reveal-left.in-view, .reveal-right.in-view { transform: translateX(0); }
   .reveal-scale { transform: scale(0.92); transform-origin: center; }
   .reveal-scale.in-view { transform: scale(1); }
-  .stagger > * { transition-delay: 0s; }
   .stagger.in-view > *:nth-child(1) { transition-delay: 0.05s; }
   .stagger.in-view > *:nth-child(2) { transition-delay: 0.18s; }
   .stagger.in-view > *:nth-child(3) { transition-delay: 0.31s; }
@@ -85,40 +92,41 @@
   }
 
   /* ============== layout ============== */
-  .container {
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  section {
-    padding: 96px 0;
-    position: relative;
-  }
-  section + section { border-top: none; }
+  .container { width: 100%; max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  section { padding: 96px 0; position: relative; }
 
-  /* alternating subtle bg */
-  .bg-cream { background: var(--cream); }
-  .bg-blush {
+  /* alternating dark backgrounds */
+  .bg-plum {
     background:
-      radial-gradient(ellipse at top, var(--cream) 0%, var(--cream-deep) 60%, var(--blush) 100%);
+      radial-gradient(ellipse at 50% 0%, var(--plum-bright) 0%, var(--plum) 50%, var(--deep) 100%);
   }
-  .bg-rose {
+  .bg-plum-mid {
     background:
-      radial-gradient(ellipse at 50% 20%, var(--cream-deep) 0%, var(--blush) 60%, #ecb4a8 100%);
+      radial-gradient(ellipse at 50% 0%, var(--purple) 0%, var(--plum-mid) 55%, var(--plum) 100%);
   }
-  .bg-deep {
+  .bg-purple {
     background:
-      radial-gradient(ellipse at 50% 0%, #6b2030 0%, #4a162a 60%, #2e0e1e 100%);
-    color: #fce4d6;
+      radial-gradient(ellipse at 50% 20%, var(--purple-light) 0%, var(--purple) 50%, var(--plum-bright) 100%);
   }
-  .bg-deep .eyebrow { color: var(--gold-light); }
-  .bg-deep h2 { color: #fde0d2; }
-  .bg-deep .lead { color: #e8b8b0; }
-  .bg-deep .body-text { color: #f4d8cc; }
-  .bg-deep .body-text em { color: var(--gold-light); }
-  .bg-deep .divider .line { background: linear-gradient(to right, transparent, var(--gold) 50%, transparent); }
-  .bg-deep .divider .diamond { background: var(--gold); box-shadow: 0 0 0 2px #4a162a, 0 0 0 3px var(--gold); }
+  .bg-deepest {
+    background:
+      radial-gradient(ellipse at 50% 0%, var(--plum) 0%, var(--deep) 70%);
+  }
+
+  /* gold sparkle wash overlay on every section */
+  section::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.5px 1px at 12% 18%, rgba(245, 211, 110, 0.45), transparent 51%),
+      radial-gradient(1.2px 1px at 86% 28%, rgba(245, 211, 110, 0.35), transparent 51%),
+      radial-gradient(1.8px 1.2px at 30% 42%, rgba(245, 211, 110, 0.30), transparent 51%),
+      radial-gradient(1.2px 1px at 70% 58%, rgba(245, 211, 110, 0.25), transparent 51%),
+      radial-gradient(1.5px 1.2px at 22% 76%, rgba(245, 211, 110, 0.35), transparent 51%),
+      radial-gradient(1.2px 1px at 78% 84%, rgba(245, 211, 110, 0.30), transparent 51%);
+    pointer-events: none;
+    z-index: 1;
+  }
 
   /* ============== typography ============== */
   .eyebrow {
@@ -127,63 +135,40 @@
     font-size: 11px;
     letter-spacing: 7px;
     text-transform: uppercase;
-    color: var(--rose-deep);
+    color: var(--gold-light);
     text-align: center;
     padding-left: 7px;
   }
-  h1 {
+  h1, h2 {
     font-family: 'Cinzel', serif;
     font-weight: 600;
-    font-size: clamp(36px, 9vw, 64px);
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--wine);
+    color: var(--gold-pale);
     text-align: center;
     line-height: 1.05;
     padding-left: 4px;
   }
+  h1 { font-size: clamp(36px, 9vw, 64px); }
   h2 {
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
     font-size: clamp(22px, 5.5vw, 32px);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--wine);
-    text-align: center;
     margin-top: 12px;
     line-height: 1.2;
-    padding-left: 4px;
-  }
-  h3 {
-    font-family: 'Cinzel', serif;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--rose-deep);
-    text-align: center;
-    padding-left: 4px;
   }
   .script {
     font-family: 'Italianno', cursive;
     font-size: clamp(36px, 9vw, 56px);
-    color: var(--rose-deep);
+    color: var(--gold-light);
     text-align: center;
     line-height: 1;
     margin: 8px 0;
-  }
-  .script-deep {
-    font-family: 'Italianno', cursive;
-    font-size: clamp(28px, 7vw, 42px);
-    color: var(--rose-deep);
-    text-align: center;
-    line-height: 1;
+    text-shadow: 0 1px 12px rgba(216, 160, 23, 0.25);
   }
   .lead {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(17px, 4.4vw, 21px);
-    color: var(--soft-ink);
+    color: var(--cream);
     text-align: center;
     max-width: 580px;
     margin: 22px auto 0;
@@ -191,48 +176,40 @@
   }
   .body-text {
     font-size: clamp(16px, 4vw, 18px);
-    color: var(--ink);
+    color: var(--cream);
     line-height: 1.7;
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
   }
   .body-text p + p { margin-top: 18px; }
-  .body-text em { font-style: italic; color: var(--rose-deep); }
+  .body-text em { font-style: italic; color: var(--gold-light); }
   .heart { color: var(--heart); font-size: 0.9em; }
 
-  /* ============== ornament: gold-rose divider ============== */
+  /* ============== divider ============== */
   .divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    width: min(280px, 70%);
-    margin: 20px auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; width: min(280px, 70%); margin: 20px auto;
   }
   .divider .line {
     flex: 1; height: 1px;
-    background: linear-gradient(to right, transparent, var(--rose) 50%, transparent);
+    background: linear-gradient(to right, transparent, var(--gold-bright) 50%, transparent);
   }
   .divider .diamond {
     width: 8px; height: 8px;
-    background: var(--rose-deep);
+    background: var(--gold-bright);
     transform: rotate(45deg);
-    box-shadow: 0 0 0 2px var(--cream), 0 0 0 3px var(--gold);
+    box-shadow: 0 0 0 2px var(--plum-mid), 0 0 0 3px var(--gold);
   }
-  .divider svg { width: 28px; height: 28px; }
 
-  /* ============== floral ornament (corner / inline) ============== */
+  /* ============== floral ornament ============== */
   .floral-ornament {
     width: 80px; height: 60px;
     margin: 0 auto 14px;
-    color: var(--rose);
+    color: var(--gold-bright);
     opacity: 0.85;
   }
-  .floral-ornament-lg {
-    width: 140px; height: 100px;
-    margin: 0 auto 18px;
-  }
+  .floral-ornament-lg { width: 140px; height: 100px; margin: 0 auto 18px; }
 
   /* ============================================================
      HERO
@@ -248,33 +225,37 @@
     position: relative;
     overflow: hidden;
     background:
-      radial-gradient(ellipse at 50% 40%, #fff8f3 0%, var(--cream-deep) 45%, var(--blush) 90%);
+      radial-gradient(ellipse at 50% 38%, var(--purple-light) 0%, var(--purple) 30%, var(--plum-bright) 60%, var(--plum) 85%, var(--deep) 100%);
   }
   .hero::before {
     content: '';
     position: absolute; inset: 0;
     background-image:
-      radial-gradient(circle at 14% 22%, rgba(200, 138, 115, 0.12) 0%, transparent 25%),
-      radial-gradient(circle at 86% 78%, rgba(183, 110, 121, 0.12) 0%, transparent 30%),
-      radial-gradient(2px 1.2px at 18% 14%, rgba(165, 90, 90, 0.30), transparent 51%),
-      radial-gradient(1.5px 1px at 78% 22%, rgba(165, 90, 90, 0.25), transparent 51%),
-      radial-gradient(1.8px 1.2px at 30% 36%, rgba(165, 90, 90, 0.22), transparent 51%),
-      radial-gradient(1.4px 1px at 66% 44%, rgba(165, 90, 90, 0.20), transparent 51%),
-      radial-gradient(2px 1.2px at 52% 88%, rgba(165, 90, 90, 0.28), transparent 51%);
+      radial-gradient(circle at 14% 22%, rgba(216, 160, 23, 0.18) 0%, transparent 28%),
+      radial-gradient(circle at 86% 78%, rgba(216, 160, 23, 0.16) 0%, transparent 30%),
+      radial-gradient(2px 1.5px at 18% 14%, rgba(245, 211, 110, 0.7), transparent 51%),
+      radial-gradient(1.5px 1.2px at 78% 22%, rgba(245, 211, 110, 0.55), transparent 51%),
+      radial-gradient(2px 1.5px at 30% 36%, rgba(245, 211, 110, 0.5), transparent 51%),
+      radial-gradient(1.5px 1.2px at 66% 44%, rgba(245, 211, 110, 0.45), transparent 51%),
+      radial-gradient(2px 1.5px at 52% 88%, rgba(245, 211, 110, 0.6), transparent 51%),
+      radial-gradient(1.5px 1.2px at 12% 70%, rgba(245, 211, 110, 0.45), transparent 51%),
+      radial-gradient(1.8px 1.4px at 88% 60%, rgba(245, 211, 110, 0.5), transparent 51%);
     pointer-events: none;
+    z-index: 1;
   }
-  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
   .hero-monogram {
-    width: 90px; height: 90px;
+    width: 96px; height: 96px;
     margin: 0 auto 16px;
-    color: var(--rose-deep);
+    color: var(--gold-bright);
+    filter: drop-shadow(0 4px 16px rgba(216, 160, 23, 0.35));
   }
   .hero-tag {
     font-family: 'Cinzel', serif;
     font-size: 11px;
     letter-spacing: 8px;
     text-transform: uppercase;
-    color: var(--rose-deep);
+    color: var(--gold-light);
     padding-left: 8px;
   }
   .hero-names {
@@ -282,19 +263,19 @@
     font-family: 'Cinzel', serif;
     font-weight: 600;
     font-size: clamp(38px, 11vw, 78px);
-    color: var(--wine);
+    color: var(--gold-pale);
     letter-spacing: 4px;
     line-height: 0.95;
     text-transform: uppercase;
     padding-left: 4px;
+    text-shadow: 0 2px 24px rgba(216, 160, 23, 0.35);
   }
   .hero-and {
     display: block;
     font-family: 'Italianno', cursive;
     font-weight: 400;
     font-size: clamp(40px, 11vw, 64px);
-    color: var(--rose-deep);
-    letter-spacing: 0;
+    color: var(--gold-bright);
     margin: -4px 0;
     text-transform: none;
     line-height: 1;
@@ -303,14 +284,14 @@
     margin-top: 18px;
     font-family: 'Italianno', cursive;
     font-size: clamp(32px, 8vw, 48px);
-    color: var(--rose-deep);
+    color: var(--gold-light);
     line-height: 1;
   }
   .hero-date {
     margin-top: 20px;
     font-family: 'Cinzel', serif;
     font-size: clamp(11px, 3vw, 13px);
-    color: var(--rose-deep);
+    color: var(--gold-light);
     letter-spacing: 6px;
     text-transform: uppercase;
     padding-left: 6px;
@@ -325,19 +306,20 @@
     max-width: 480px;
   }
   .countdown-cell {
-    background: rgba(255, 248, 243, 0.6);
-    border: 1px solid var(--rose);
+    background: rgba(20, 8, 42, 0.45);
+    border: 1px solid var(--gold);
     padding: 12px 6px;
     border-radius: 4px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 0 3px rgba(20, 8, 42, 0.4), inset 0 0 0 3.5px var(--gold-bright);
   }
   .countdown-num {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
     font-style: italic;
     font-size: clamp(28px, 8vw, 38px);
-    color: var(--wine);
+    color: var(--gold-pale);
     line-height: 1;
   }
   .countdown-label {
@@ -345,7 +327,7 @@
     font-size: 9px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--rose-deep);
+    color: var(--gold-light);
     margin-top: 6px;
     padding-left: 3px;
   }
@@ -355,15 +337,16 @@
     bottom: 24px; left: 50%; transform: translateX(-50%);
     font-family: 'Italianno', cursive;
     font-size: 20px;
-    color: var(--rose-deep);
+    color: var(--gold-light);
     opacity: 0.85;
+    z-index: 2;
     animation: drift 2.5s ease-in-out infinite;
   }
   .scroll-cue::after {
     content: '';
     display: block;
     width: 1px; height: 26px;
-    background: linear-gradient(to bottom, var(--rose-deep), transparent);
+    background: linear-gradient(to bottom, var(--gold-light), transparent);
     margin: 6px auto 0;
   }
   @keyframes drift {
@@ -372,15 +355,15 @@
   }
 
   /* ============================================================
-     PHOTO FRAMES (placeholders)
+     PHOTO FRAMES
      ============================================================ */
   .photo-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 5;        /* portrait, ideal for mobile photos */
+    aspect-ratio: 4 / 5;
     background:
-      linear-gradient(135deg, var(--cream-deep) 0%, var(--blush) 100%);
-    border: 1px solid var(--rose);
+      linear-gradient(135deg, var(--plum-mid) 0%, var(--purple) 100%);
+    border: 1px solid var(--gold);
     box-shadow: var(--shadow-card);
     overflow: hidden;
     border-radius: 2px;
@@ -388,7 +371,7 @@
   .photo-frame::before {
     content: '';
     position: absolute; inset: 4px;
-    border: 0.5px solid var(--gold);
+    border: 0.5px solid var(--gold-bright);
     pointer-events: none;
     z-index: 2;
   }
@@ -398,14 +381,14 @@
     display: flex; align-items: center; justify-content: center;
     font-family: 'Italianno', cursive;
     font-size: clamp(20px, 5vw, 28px);
-    color: var(--rose-deep);
+    color: var(--gold-light);
     text-align: center;
     padding: 10%;
     z-index: 0;
-    opacity: 0.8;
+    opacity: 0.85;
     background:
-      radial-gradient(circle at 30% 30%, rgba(200, 138, 115, 0.12), transparent 60%),
-      radial-gradient(circle at 70% 70%, rgba(183, 110, 121, 0.15), transparent 60%);
+      radial-gradient(circle at 30% 30%, rgba(216, 160, 23, 0.12), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(122, 85, 168, 0.18), transparent 60%);
   }
   .photo-frame img {
     position: relative; z-index: 1;
@@ -415,18 +398,13 @@
   .photo-frame.banner    { aspect-ratio: 3 / 2; }
   .photo-frame.square    { aspect-ratio: 1 / 1; }
 
-  /* feature photo with caption */
-  .feature-photo {
-    margin: 36px auto 0;
-    max-width: 460px;
-  }
-  .feature-photo .photo-frame { aspect-ratio: 4 / 5; }
+  .feature-photo { margin: 36px auto 0; max-width: 460px; }
   .photo-caption {
     margin-top: 14px;
     text-align: center;
     font-family: 'Italianno', cursive;
     font-size: 24px;
-    color: var(--rose-deep);
+    color: var(--gold-light);
   }
 
   /* ============================================================
@@ -446,7 +424,7 @@
   }
 
   /* ============================================================
-     DYNAMIC CARDS
+     DYNAMIC CARDS — all double-bordered like the "final box"
      ============================================================ */
   .cards {
     margin-top: 36px;
@@ -456,24 +434,19 @@
   }
   @media (min-width: 700px) { .cards { grid-template-columns: 1fr 1fr; } }
   .card {
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid var(--rose);
-    padding: 22px 22px 24px;
+    background: linear-gradient(180deg, rgba(74, 40, 109, 0.45) 0%, rgba(28, 13, 58, 0.55) 100%);
+    border: 1px solid var(--gold-bright);
+    box-shadow: inset 0 0 0 3px rgba(20, 8, 42, 0.6), inset 0 0 0 3.5px var(--gold);
+    padding: 26px 22px 26px;
     text-align: center;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     position: relative;
   }
-  .card::before {
-    content: '';
-    position: absolute; inset: 4px;
-    border: 0.5px solid var(--gold);
-    pointer-events: none;
-  }
   .card-icon {
     width: 36px; height: 36px;
     margin: 0 auto 10px;
-    color: var(--rose-deep);
+    color: var(--gold-bright);
   }
   .card-title {
     font-family: 'Cinzel', serif;
@@ -481,7 +454,7 @@
     font-size: 12px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--wine);
+    color: var(--gold-pale);
     margin-bottom: 8px;
     padding-left: 4px;
   }
@@ -490,23 +463,27 @@
     font-style: italic;
     font-size: 16px;
     line-height: 1.5;
-    color: var(--soft-ink);
+    color: var(--cream);
   }
 
   /* ============================================================
-     QUOTE BLOCKS (His/Her words)
+     QUOTE BLOCKS — also framed like the final box
      ============================================================ */
   .quote-block {
     margin: 32px auto 0;
     max-width: 600px;
     text-align: center;
+    padding: 28px 24px;
+    background: linear-gradient(180deg, rgba(74, 40, 109, 0.30) 0%, rgba(28, 13, 58, 0.45) 100%);
+    border: 1px solid var(--gold);
+    box-shadow: inset 0 0 0 3px rgba(20, 8, 42, 0.55), inset 0 0 0 3.5px var(--gold-bright);
   }
   .quote-block .quote-mark {
     font-family: 'Cormorant Garamond', serif;
     font-size: 80px;
     line-height: 0.5;
-    color: var(--gold);
-    opacity: 0.6;
+    color: var(--gold-bright);
+    opacity: 0.7;
     height: 32px;
   }
   .quote-block blockquote {
@@ -514,18 +491,18 @@
     font-style: italic;
     font-size: clamp(18px, 5vw, 24px);
     line-height: 1.5;
-    color: var(--wine);
+    color: var(--gold-pale);
     margin: 6px 0 14px;
   }
   .quote-block cite {
     font-family: 'Italianno', cursive;
     font-style: normal;
     font-size: 28px;
-    color: var(--rose-deep);
+    color: var(--gold-light);
   }
 
   /* ============================================================
-     LOVE LANGUAGES (3 columns on desktop, stacked mobile)
+     LOVE LANGUAGES
      ============================================================ */
   .languages {
     margin-top: 36px;
@@ -535,22 +512,18 @@
   }
   @media (min-width: 720px) { .languages { grid-template-columns: 1fr 1fr 1fr; } }
   .lang-card {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--rose);
-    padding: 28px 22px 22px;
+    background: linear-gradient(180deg, rgba(74, 40, 109, 0.45) 0%, rgba(28, 13, 58, 0.55) 100%);
+    border: 1px solid var(--gold-bright);
+    box-shadow: inset 0 0 0 4px rgba(20, 8, 42, 0.65), inset 0 0 0 4.5px var(--gold);
+    padding: 28px 22px 24px;
     text-align: center;
     position: relative;
-  }
-  .lang-card::before {
-    content: '';
-    position: absolute; inset: 5px;
-    border: 0.5px solid var(--gold);
-    pointer-events: none;
   }
   .lang-icon {
     width: 44px; height: 44px;
     margin: 0 auto 12px;
-    color: var(--rose-deep);
+    color: var(--gold-bright);
+    filter: drop-shadow(0 2px 8px rgba(216, 160, 23, 0.4));
   }
   .lang-title {
     font-family: 'Cinzel', serif;
@@ -558,24 +531,21 @@
     font-size: 13px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--wine);
+    color: var(--gold-pale);
     margin-bottom: 14px;
     padding-left: 4px;
   }
-  .lang-list {
-    list-style: none;
-    text-align: center;
-  }
+  .lang-list { list-style: none; text-align: center; }
   .lang-list li {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 16px;
-    color: var(--soft-ink);
+    color: var(--cream);
     line-height: 2;
   }
 
   /* ============================================================
-     VISION LIST (ordinary happiness)
+     VISION LIST
      ============================================================ */
   .vision-list {
     margin: 36px auto 0;
@@ -589,19 +559,19 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 17px;
-    color: var(--soft-ink);
+    color: var(--cream);
     text-align: center;
     padding: 12px 6px;
-    border-top: 1px solid var(--rose);
-    border-bottom: 1px solid var(--rose);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
     position: relative;
   }
   .vision-list li::before {
     content: '\2766';
-    color: var(--rose);
+    color: var(--gold-bright);
     margin-right: 6px;
     font-size: 14px;
-    opacity: 0.7;
+    opacity: 0.85;
   }
 
   /* ============================================================
@@ -617,27 +587,31 @@
     margin-right: auto;
   }
   .fact {
-    background: rgba(255, 255, 255, 0.55);
-    border-left: 3px solid var(--rose-deep);
+    background: rgba(74, 40, 109, 0.35);
+    border-left: 3px solid var(--gold-bright);
+    border-right: 1px solid var(--gold);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
     padding: 14px 18px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 16px;
-    color: var(--soft-ink);
+    color: var(--cream);
     line-height: 1.5;
   }
+  .fact em { color: var(--gold-light); }
 
   /* ============================================================
-     SAVE THE DATE
+     SAVE THE DATE — the centerpiece, full "final box" style
      ============================================================ */
   .save-date {
     margin: 40px auto 0;
     max-width: 480px;
     background:
-      linear-gradient(180deg, rgba(255, 248, 243, 0.7) 0%, rgba(248, 212, 203, 0.4) 100%);
-    border: 1.5px solid var(--rose-deep);
-    box-shadow: inset 0 0 0 4px rgba(255, 248, 243, 0.85), inset 0 0 0 4.5px var(--gold);
-    padding: 36px 28px;
+      linear-gradient(180deg, rgba(74, 40, 109, 0.55) 0%, rgba(20, 8, 42, 0.75) 100%);
+    border: 1.5px solid var(--gold-bright);
+    box-shadow: inset 0 0 0 5px rgba(20, 8, 42, 0.85), inset 0 0 0 5.5px var(--gold);
+    padding: 40px 28px;
     text-align: center;
     position: relative;
   }
@@ -646,7 +620,7 @@
     font-size: 14px;
     letter-spacing: 8px;
     text-transform: uppercase;
-    color: var(--rose-deep);
+    color: var(--gold-light);
     padding-left: 8px;
   }
   .save-date .day {
@@ -655,7 +629,7 @@
     font-style: italic;
     font-size: clamp(64px, 18vw, 110px);
     line-height: 1;
-    background: linear-gradient(180deg, #d99a8a 0%, #b76e79 40%, #8b3a5c 80%, #5a1f3a 100%);
+    background: linear-gradient(180deg, #f5d76e 0%, #d4a017 40%, #b89968 80%, #6b4818 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -665,14 +639,14 @@
     font-family: 'Cinzel', serif;
     font-size: 16px;
     letter-spacing: 10px;
-    color: var(--wine);
+    color: var(--gold-pale);
     padding-left: 10px;
   }
   .save-date .venue {
     margin-top: 18px;
     font-family: 'Italianno', cursive;
     font-size: 30px;
-    color: var(--rose-deep);
+    color: var(--gold-light);
     line-height: 1.1;
   }
   .save-date .small-meta {
@@ -680,7 +654,7 @@
     font-family: 'Cinzel', serif;
     font-size: 10px;
     letter-spacing: 4px;
-    color: var(--soft-ink);
+    color: var(--soft-cream);
     text-transform: uppercase;
     padding-left: 4px;
   }
@@ -691,17 +665,17 @@
   .closing-quote {
     margin: 40px auto 0;
     max-width: 640px;
-    padding: 36px 24px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--gold);
-    box-shadow: inset 0 0 0 3px rgba(74, 22, 42, 0.6), inset 0 0 0 3.5px var(--gold);
+    padding: 40px 28px;
+    background: linear-gradient(180deg, rgba(74, 40, 109, 0.45) 0%, rgba(14, 5, 32, 0.7) 100%);
+    border: 1.5px solid var(--gold-bright);
+    box-shadow: inset 0 0 0 5px rgba(14, 5, 32, 0.85), inset 0 0 0 5.5px var(--gold);
     text-align: center;
   }
   .closing-quote .text {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(18px, 5vw, 24px);
-    color: #fde0d2;
+    color: var(--gold-pale);
     line-height: 1.55;
   }
   .closing-quote .sig {
@@ -714,13 +688,15 @@
   footer {
     padding: 40px 24px;
     text-align: center;
-    background: var(--wine-deep);
-    color: #fde0d2;
+    background: var(--deep);
+    color: var(--gold-pale);
+    position: relative;
+    z-index: 2;
   }
   footer .names {
     font-family: 'Italianno', cursive;
     font-size: 36px;
-    color: var(--gold-light);
+    color: var(--gold-bright);
     line-height: 1;
   }
   footer .made-with {
@@ -728,37 +704,65 @@
     font-family: 'Cinzel', serif;
     font-size: 10px;
     letter-spacing: 4px;
-    color: rgba(253, 224, 210, 0.55);
+    color: rgba(245, 233, 208, 0.45);
     text-transform: uppercase;
     padding-left: 4px;
   }
   footer .heart-big { color: var(--heart); }
 
   /* ============================================================
-     FLOATING PETALS (decorative, only on capable devices)
+     SCROLL TRAIL — flower that follows scroll, star trail behind
      ============================================================ */
-  .petals {
+  .scroll-flower {
     position: fixed;
-    inset: 0;
+    top: 80px;
+    right: 28px;
+    width: 38px;
+    height: 38px;
+    z-index: 60;
     pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
+    filter: drop-shadow(0 0 8px rgba(216, 160, 23, 0.65));
+    transition: top 0.18s cubic-bezier(.4,.2,.3,1), transform 0.25s cubic-bezier(.4,.2,.3,1);
   }
-  .petal {
+  .scroll-flower svg { width: 100%; height: 100%; }
+  .scroll-flower .bloom {
+    transform-origin: center;
+    animation: bloom-spin 14s linear infinite;
+  }
+  @keyframes bloom-spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .star-trail {
     position: absolute;
-    width: 14px; height: 14px;
-    border-radius: 65% 35% 65% 35%;
-    background: radial-gradient(circle at 30% 30%, #fff0e8, #f5b8b0 60%, #c98a73);
-    opacity: 0.65;
-    top: -20px;
-    animation: fall linear infinite;
+    top: 0; right: 0;
+    width: 110px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 55;
+    overflow: visible;
   }
-  @keyframes fall {
-    0%   { transform: translate(0, -20px) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.7; }
-    100% { transform: translate(var(--drift, 40px), 110vh) rotate(720deg); opacity: 0; }
+  .trail-star {
+    position: absolute;
+    pointer-events: none;
+    color: var(--gold-bright);
+    filter: drop-shadow(0 0 4px rgba(216, 160, 23, 0.7));
+    animation: starPop 1.4s cubic-bezier(.2,.7,.2,1) forwards;
   }
-  @media (prefers-reduced-motion: reduce) { .petals { display: none; } }
+  .trail-star svg { width: 100%; height: 100%; }
+  @keyframes starPop {
+    0%   { opacity: 0; transform: scale(0.2) rotate(0deg); }
+    25%  { opacity: 1; transform: scale(1.4) rotate(80deg); }
+    100% { opacity: 0.85; transform: scale(1) rotate(180deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-flower, .star-trail { display: none; }
+  }
+  @media (max-width: 380px) {
+    /* smaller flower on tiny screens, less space */
+    .scroll-flower { width: 30px; height: 30px; right: 12px; }
+    .star-trail { width: 70px; }
+  }
 
   /* ============================================================
      MOBILE TUNING
@@ -774,12 +778,47 @@
 </head>
 <body>
 
-<!-- ============== floating petals ============== -->
-<div class="petals" aria-hidden="true" id="petals"></div>
+<!-- ============================================================
+     SCROLL FLOWER + STAR TRAIL
+     ============================================================ -->
+<div class="star-trail" id="starTrail" aria-hidden="true"></div>
+<div class="scroll-flower" id="scrollFlower" aria-hidden="true">
+  <svg viewBox="0 0 40 40">
+    <defs>
+      <radialGradient id="petalGrad" cx="40%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#f5e3b8"/>
+        <stop offset="45%" stop-color="#d4a017"/>
+        <stop offset="100%" stop-color="#4b286d"/>
+      </radialGradient>
+      <radialGradient id="centerGrad" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#fff5c0"/>
+        <stop offset="55%" stop-color="#d4a017"/>
+        <stop offset="100%" stop-color="#8a5a08"/>
+      </radialGradient>
+    </defs>
+    <g class="bloom">
+      <g fill="url(#petalGrad)" stroke="#3a1d62" stroke-width="0.5">
+        <ellipse cx="20" cy="9" rx="5.5" ry="9"/>
+        <ellipse cx="29.5" cy="15" rx="5.5" ry="9" transform="rotate(72 29.5 15)"/>
+        <ellipse cx="26" cy="29" rx="5.5" ry="9" transform="rotate(144 26 29)"/>
+        <ellipse cx="14" cy="29" rx="5.5" ry="9" transform="rotate(-144 14 29)"/>
+        <ellipse cx="10.5" cy="15" rx="5.5" ry="9" transform="rotate(-72 10.5 15)"/>
+      </g>
+      <circle cx="20" cy="20" r="4.5" fill="url(#centerGrad)" stroke="#5a3a04" stroke-width="0.5"/>
+      <circle cx="19" cy="19" r="1.6" fill="#fff5c0" opacity="0.85"/>
+    </g>
+  </svg>
+</div>
 
 <!-- ============== reusable SVG defs ============== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <symbol id="trail-star" viewBox="0 0 20 20">
+      <path d="M10 1 L 12 7 L 19 8 L 13.5 12 L 15 19 L 10 15 L 5 19 L 6.5 12 L 1 8 L 8 7 Z"
+            fill="currentColor"/>
+      <circle cx="10" cy="10" r="1.2" fill="#fff5c0"/>
+    </symbol>
+
     <symbol id="rose-flourish" viewBox="0 0 100 60">
       <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
         <path d="M5 30 Q 20 22, 36 30"/>
@@ -789,9 +828,9 @@
       </g>
       <g transform="translate(50 30)">
         <circle r="6" fill="currentColor" opacity="0.85"/>
-        <circle r="3" fill="#fff" opacity="0.4"/>
+        <circle r="3" fill="#fff5c0" opacity="0.7"/>
       </g>
-      <g fill="currentColor" opacity="0.6">
+      <g fill="currentColor" opacity="0.65">
         <ellipse cx="20" cy="26" rx="3" ry="1.2" transform="rotate(-15 20 26)"/>
         <ellipse cx="80" cy="34" rx="3" ry="1.2" transform="rotate(15 80 34)"/>
       </g>
@@ -804,25 +843,21 @@
         <path d="M80 50 Q 86 44, 92 50"/>
         <path d="M108 50 Q 114 56, 120 50"/>
       </g>
-      <!-- center rose -->
       <g transform="translate(100 50)">
         <circle r="10" fill="currentColor" opacity="0.85"/>
-        <circle r="5" fill="#fff" opacity="0.35"/>
+        <circle r="5" fill="#fff5c0" opacity="0.6"/>
       </g>
-      <!-- sage leaves -->
-      <g fill="#7a8b6f" opacity="0.85">
+      <g fill="#7a55a8" opacity="0.85">
         <path d="M86 50 Q 92 44, 96 50 Q 92 54, 86 50 Z"/>
         <path d="M114 50 Q 108 44, 104 50 Q 108 54, 114 50 Z"/>
       </g>
-      <!-- buds -->
       <g fill="currentColor" opacity="0.7">
         <ellipse cx="40" cy="44" rx="3.5" ry="2" transform="rotate(-15 40 44)"/>
         <ellipse cx="160" cy="56" rx="3.5" ry="2" transform="rotate(15 160 56)"/>
         <ellipse cx="60" cy="48" rx="2.5" ry="1.4" transform="rotate(-10 60 48)"/>
         <ellipse cx="140" cy="52" rx="2.5" ry="1.4" transform="rotate(10 140 52)"/>
       </g>
-      <!-- pearls -->
-      <g fill="#d4a017" opacity="0.7">
+      <g fill="#fff5c0" opacity="0.8">
         <circle cx="40" cy="44" r="0.9"/>
         <circle cx="160" cy="56" r="0.9"/>
       </g>
@@ -830,40 +865,39 @@
 
     <symbol id="heart-rose-crest" viewBox="0 0 100 100">
       <g>
-        <!-- rose garland -->
+        <!-- crown atop -->
+        <g fill="#d4a017" stroke="#3a1d62" stroke-width="0.5">
+          <path d="M30 24 L 36 14 L 44 22 L 50 12 L 56 22 L 64 14 L 70 24 Z"/>
+          <rect x="30" y="24" width="40" height="3.5"/>
+        </g>
+        <circle cx="50" cy="12" r="2" fill="#7a55a8" stroke="#d4a017" stroke-width="0.4"/>
+        <!-- laurel arc -->
         <path d="M20 50 Q 28 78, 50 84 Q 72 78, 80 50"
-              fill="none" stroke="#7a8b6f" stroke-width="0.7" stroke-linecap="round"/>
-        <g fill="#7a8b6f">
+              fill="none" stroke="#7a55a8" stroke-width="0.7" stroke-linecap="round"/>
+        <g fill="#7a55a8">
           <path d="M22 54 Q 26 50, 30 54 Q 26 58, 22 54 Z"/>
           <path d="M70 54 Q 74 50, 78 54 Q 74 58, 70 54 Z"/>
           <path d="M30 70 Q 34 66, 38 72 Q 34 75, 30 70 Z"/>
           <path d="M70 70 Q 66 66, 62 72 Q 66 75, 70 70 Z"/>
         </g>
-        <g fill="#b76e79" stroke="#5a1f3a" stroke-width="0.3">
+        <g fill="#d4a017" stroke="#5a3a04" stroke-width="0.3">
           <circle cx="26" cy="58" r="2.5"/>
           <circle cx="44" cy="80" r="2.6"/>
           <circle cx="56" cy="80" r="2.6"/>
           <circle cx="74" cy="58" r="2.5"/>
-          <circle cx="33" cy="68" r="1.8" fill="#c98a73"/>
-          <circle cx="67" cy="68" r="1.8" fill="#c98a73"/>
+          <circle cx="33" cy="68" r="1.8" fill="#e8c97a"/>
+          <circle cx="67" cy="68" r="1.8" fill="#e8c97a"/>
         </g>
         <!-- heart -->
-        <path d="M50 36 C 46 30, 38 30, 38 38 C 38 46, 50 56, 50 56 C 50 56, 62 46, 62 38 C 62 30, 54 30, 50 36 Z"
-              fill="#b76e79" stroke="#5a1f3a" stroke-width="0.5"/>
-        <path d="M44 36 Q 46 34, 48 36" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.6"/>
-        <!-- top sprig -->
-        <g fill="#d4a017">
-          <circle cx="50" cy="16" r="2"/>
-          <circle cx="44" cy="22" r="1.4"/>
-          <circle cx="56" cy="22" r="1.4"/>
-        </g>
-        <path d="M50 18 L 50 28" stroke="#7a8b6f" stroke-width="0.5" fill="none"/>
+        <path d="M50 40 C 46 34, 38 34, 38 42 C 38 50, 50 60, 50 60 C 50 60, 62 50, 62 42 C 62 34, 54 34, 50 40 Z"
+              fill="#d4a017" stroke="#3a1d62" stroke-width="0.5"/>
+        <path d="M44 40 Q 46 38, 48 40" stroke="#fff5c0" stroke-width="0.6" fill="none" opacity="0.7"/>
         <!-- initials banner -->
-        <g fill="#c98a73" stroke="#5a1f3a" stroke-width="0.25">
+        <g fill="#7a55a8" stroke="#d4a017" stroke-width="0.3">
           <path d="M22 90 Q 18 94, 22 96 L 78 96 Q 82 94, 78 90 Z"/>
         </g>
         <text x="50" y="94.5" font-family="Cinzel" font-weight="700" font-size="4"
-              text-anchor="middle" fill="#fef7f3">R &amp; D</text>
+              text-anchor="middle" fill="#fff5c0">R &amp; D</text>
       </g>
     </symbol>
 
@@ -883,10 +917,6 @@
     </symbol>
     <symbol id="icon-talk" viewBox="0 0 24 24">
       <path d="M3 5 H21 V17 H7 L3 21 Z" fill="currentColor"/>
-    </symbol>
-    <symbol id="icon-ring" viewBox="0 0 24 24">
-      <circle cx="12" cy="15" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M9 7 L12 3 L15 7 Z" fill="currentColor"/>
     </symbol>
   </defs>
 </svg>
@@ -919,7 +949,7 @@
 <!-- ============================================================
      OUR STORY
      ============================================================ -->
-<section class="bg-cream">
+<section class="bg-plum">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">Chapter One</div>
@@ -951,7 +981,7 @@
 <!-- ============================================================
      OUR DYNAMIC
      ============================================================ -->
-<section class="bg-blush">
+<section class="bg-plum-mid">
   <div class="container">
     <svg class="floral-ornament-lg reveal" viewBox="0 0 200 100"><use href="#rose-flourish-lg"/></svg>
     <div class="eyebrow reveal">The Many Forms of Us</div>
@@ -993,7 +1023,7 @@
     </div>
     <div class="quote-block reveal">
       <div class="quote-mark">&ldquo;</div>
-      <blockquote>I didn&rsquo;t have you back then. You are literally my strength now.</blockquote>
+      <blockquote>I pray to God everyday that you get everything in life you want, and I just get you.</blockquote>
       <cite>&mdash; Rinky</cite>
     </div>
   </div>
@@ -1002,7 +1032,7 @@
 <!-- ============================================================
      WHAT MAKES OUR LOVE UNIQUE
      ============================================================ -->
-<section class="bg-cream">
+<section class="bg-plum">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">What Makes Us, Us</div>
@@ -1027,7 +1057,7 @@
 <!-- ============================================================
      GALLERY
      ============================================================ -->
-<section class="bg-blush">
+<section class="bg-purple">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">Moments of Us</div>
@@ -1061,7 +1091,7 @@
 <!-- ============================================================
      HE SAYS / SHE SAYS
      ============================================================ -->
-<section class="bg-cream">
+<section class="bg-plum">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">In His Words</div>
@@ -1098,7 +1128,7 @@
   </div>
 </section>
 
-<section class="bg-blush">
+<section class="bg-plum-mid">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">In Her Words</div>
@@ -1127,7 +1157,7 @@
 <!-- ============================================================
      LOVE LANGUAGES
      ============================================================ -->
-<section class="bg-cream">
+<section class="bg-plum">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">How We Love</div>
@@ -1176,7 +1206,7 @@
 <!-- ============================================================
      OUR VISION OF MARRIAGE
      ============================================================ -->
-<section class="bg-blush">
+<section class="bg-plum-mid">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">What We Dream Of</div>
@@ -1205,7 +1235,7 @@
 <!-- ============================================================
      FUN FACTS
      ============================================================ -->
-<section class="bg-cream">
+<section class="bg-plum">
   <div class="container">
     <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">Little Things About Us</div>
@@ -1227,7 +1257,7 @@
 <!-- ============================================================
      SAVE THE DATE
      ============================================================ -->
-<section class="bg-rose">
+<section class="bg-purple">
   <div class="container">
     <svg class="floral-ornament-lg reveal" viewBox="0 0 200 100"><use href="#rose-flourish-lg"/></svg>
     <div class="eyebrow reveal">Save The Date</div>
@@ -1245,14 +1275,14 @@
 </section>
 
 <!-- ============================================================
-     CLOSING / DARK
+     CLOSING
      ============================================================ -->
-<section class="bg-deep">
+<section class="bg-deepest">
   <div class="container">
-    <svg class="floral-ornament reveal" viewBox="0 0 100 60" style="color:#d4a017"><use href="#rose-flourish"/></svg>
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
     <div class="eyebrow reveal">In One Sentence</div>
     <h2 class="reveal">Home</h2>
-    <div class="script-deep reveal" style="color:#e8c97a;">we found it in each other</div>
+    <div class="script reveal">we found it in each other</div>
     <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
     <div class="closing-quote reveal reveal-scale">
@@ -1276,7 +1306,7 @@
      SCRIPTS
      ============================================================ -->
 <script>
-  // -------- Countdown to wedding (June 28, 2026 at 00:00 local) --------
+  // -------- Countdown to wedding (June 28, 2026) --------
   (function () {
     var target = new Date('2026-06-28T00:00:00').getTime();
     var $d = document.getElementById('cd-days');
@@ -1285,8 +1315,7 @@
     var $s = document.getElementById('cd-sec');
 
     function tick() {
-      var now = Date.now();
-      var diff = Math.max(0, target - now);
+      var diff = Math.max(0, target - Date.now());
       var days = Math.floor(diff / 86400000);
       var hrs  = Math.floor((diff % 86400000) / 3600000);
       var min  = Math.floor((diff % 3600000) / 60000);
@@ -1300,7 +1329,7 @@
     setInterval(tick, 1000);
   })();
 
-  // -------- Scroll reveal via IntersectionObserver --------
+  // -------- Scroll reveal --------
   (function () {
     if (!('IntersectionObserver' in window)) {
       document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in-view'); });
@@ -1317,25 +1346,72 @@
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   })();
 
-  // -------- Floating petals --------
+  // -------- Scroll-following flower + starry trail --------
   (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var host = document.getElementById('petals');
-    if (!host) return;
-    var count = window.innerWidth < 600 ? 10 : 18;
-    for (var i = 0; i < count; i++) {
-      var p = document.createElement('span');
-      p.className = 'petal';
-      var size = 8 + Math.random() * 14;
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = (Math.random() * 100) + 'vw';
-      p.style.animationDuration = (12 + Math.random() * 16) + 's';
-      p.style.animationDelay = (-Math.random() * 20) + 's';
-      p.style.setProperty('--drift', ((Math.random() * 200 - 100) | 0) + 'px');
-      p.style.opacity = (0.4 + Math.random() * 0.4).toFixed(2);
-      host.appendChild(p);
+    var flower = document.getElementById('scrollFlower');
+    var trail = document.getElementById('starTrail');
+    if (!flower || !trail) return;
+
+    var lastStarDocY = -1000;
+    var stars = [];
+    var MAX_STARS = 24;
+    var ticking = false;
+
+    // Build a star DOM element
+    function makeStar(docY, xOffset, size) {
+      var el = document.createElement('div');
+      el.className = 'trail-star';
+      el.style.top = (docY - size / 2) + 'px';
+      // we anchor stars to right side, with horizontal wiggle based on xOffset
+      el.style.right = (40 - xOffset) + 'px';
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.innerHTML = '<svg viewBox="0 0 20 20"><use href="#trail-star"/></svg>';
+      trail.appendChild(el);
+      stars.push(el);
+      // After animation finishes, ease to lower opacity but keep it
+      setTimeout(function () {
+        if (el.parentNode) el.style.opacity = '0.55';
+      }, 1400);
+      // Cap total stars so DOM doesn't grow forever
+      if (stars.length > MAX_STARS) {
+        var oldest = stars.shift();
+        if (oldest && oldest.parentNode) oldest.parentNode.removeChild(oldest);
+      }
     }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        var progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+
+        // Flower descends from near top (80px) to near bottom of viewport (vh - 120)
+        var viewportH = window.innerHeight;
+        var flowerY = 80 + progress * (viewportH - 200);
+
+        // Curly horizontal wiggle — 8 oscillations over full scroll
+        var wiggle = Math.sin(progress * Math.PI * 8) * 26;
+        flower.style.top = flowerY + 'px';
+        flower.style.transform = 'translateX(' + wiggle + 'px)';
+
+        // Drop a star every ~70px of scroll
+        var docY = window.scrollY + flowerY;
+        if (Math.abs(docY - lastStarDocY) > 70) {
+          var size = 10 + Math.random() * 6;
+          makeStar(docY, wiggle, size);
+          lastStarDocY = docY;
+        }
+
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
   })();
 </script>
 
