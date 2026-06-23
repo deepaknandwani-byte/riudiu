@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<meta name="theme-color" content="#fde7e1" />
+<title>Riu &amp; Diu &middot; Two Hearts, One Home</title>
+<meta name="description" content="The wedding of Rinky &amp; Deepak — June 28-29, 2026. After everything life taught them separately, they found home in each other." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Italianno&family=Great+Vibes&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     RIU & DIU — wedding one-pager
+     Theme: royal-rose, white-pink, floral, scroll-revealed
+     ============================================================ */
+
+  :root {
+    --cream: #fef7f3;
+    --cream-deep: #fde7e1;
+    --blush: #f8d4cb;
+    --blush-deep: #f0b8b0;
+    --rose: #c98a73;
+    --rose-deep: #b76e79;
+    --wine: #5a1f3a;
+    --wine-deep: #3a0f24;
+    --gold: #d4a017;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e3b8;
+    --sage: #7a8b6f;
+    --sage-deep: #5a6b50;
+    --ink: #4a1f2a;
+    --soft-ink: #6b3a48;
+    --heart: #c8385a;
+
+    --shadow-soft: 0 6px 24px rgba(120, 50, 60, 0.10);
+    --shadow-card: 0 12px 36px rgba(120, 50, 60, 0.14);
+    --shadow-lift: 0 24px 60px rgba(120, 50, 60, 0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  ::selection { background: var(--rose-deep); color: #fff; }
+
+  /* ============== shared reveal animations ============== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
+    will-change: opacity, transform;
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  .reveal-left  { transform: translateX(-36px); }
+  .reveal-right { transform: translateX(36px);  }
+  .reveal-left.in-view, .reveal-right.in-view { transform: translateX(0); }
+  .reveal-scale { transform: scale(0.92); transform-origin: center; }
+  .reveal-scale.in-view { transform: scale(1); }
+  .stagger > * { transition-delay: 0s; }
+  .stagger.in-view > *:nth-child(1) { transition-delay: 0.05s; }
+  .stagger.in-view > *:nth-child(2) { transition-delay: 0.18s; }
+  .stagger.in-view > *:nth-child(3) { transition-delay: 0.31s; }
+  .stagger.in-view > *:nth-child(4) { transition-delay: 0.44s; }
+  .stagger.in-view > *:nth-child(5) { transition-delay: 0.57s; }
+  .stagger.in-view > *:nth-child(6) { transition-delay: 0.70s; }
+  .stagger.in-view > *:nth-child(7) { transition-delay: 0.83s; }
+  .stagger.in-view > *:nth-child(8) { transition-delay: 0.96s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ============== layout ============== */
+  .container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  section {
+    padding: 96px 0;
+    position: relative;
+  }
+  section + section { border-top: none; }
+
+  /* alternating subtle bg */
+  .bg-cream { background: var(--cream); }
+  .bg-blush {
+    background:
+      radial-gradient(ellipse at top, var(--cream) 0%, var(--cream-deep) 60%, var(--blush) 100%);
+  }
+  .bg-rose {
+    background:
+      radial-gradient(ellipse at 50% 20%, var(--cream-deep) 0%, var(--blush) 60%, #ecb4a8 100%);
+  }
+  .bg-deep {
+    background:
+      radial-gradient(ellipse at 50% 0%, #6b2030 0%, #4a162a 60%, #2e0e1e 100%);
+    color: #fce4d6;
+  }
+  .bg-deep .eyebrow { color: var(--gold-light); }
+  .bg-deep h2 { color: #fde0d2; }
+  .bg-deep .lead { color: #e8b8b0; }
+  .bg-deep .body-text { color: #f4d8cc; }
+  .bg-deep .body-text em { color: var(--gold-light); }
+  .bg-deep .divider .line { background: linear-gradient(to right, transparent, var(--gold) 50%, transparent); }
+  .bg-deep .divider .diamond { background: var(--gold); box-shadow: 0 0 0 2px #4a162a, 0 0 0 3px var(--gold); }
+
+  /* ============== typography ============== */
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    text-align: center;
+    padding-left: 7px;
+  }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: clamp(36px, 9vw, 64px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--wine);
+    text-align: center;
+    line-height: 1.05;
+    padding-left: 4px;
+  }
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: clamp(22px, 5.5vw, 32px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--wine);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.2;
+    padding-left: 4px;
+  }
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    text-align: center;
+    padding-left: 4px;
+  }
+  .script {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(36px, 9vw, 56px);
+    color: var(--rose-deep);
+    text-align: center;
+    line-height: 1;
+    margin: 8px 0;
+  }
+  .script-deep {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(28px, 7vw, 42px);
+    color: var(--rose-deep);
+    text-align: center;
+    line-height: 1;
+  }
+  .lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(17px, 4.4vw, 21px);
+    color: var(--soft-ink);
+    text-align: center;
+    max-width: 580px;
+    margin: 22px auto 0;
+    line-height: 1.5;
+  }
+  .body-text {
+    font-size: clamp(16px, 4vw, 18px);
+    color: var(--ink);
+    line-height: 1.7;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .body-text p + p { margin-top: 18px; }
+  .body-text em { font-style: italic; color: var(--rose-deep); }
+  .heart { color: var(--heart); font-size: 0.9em; }
+
+  /* ============== ornament: gold-rose divider ============== */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: min(280px, 70%);
+    margin: 20px auto;
+  }
+  .divider .line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--rose) 50%, transparent);
+  }
+  .divider .diamond {
+    width: 8px; height: 8px;
+    background: var(--rose-deep);
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 2px var(--cream), 0 0 0 3px var(--gold);
+  }
+  .divider svg { width: 28px; height: 28px; }
+
+  /* ============== floral ornament (corner / inline) ============== */
+  .floral-ornament {
+    width: 80px; height: 60px;
+    margin: 0 auto 14px;
+    color: var(--rose);
+    opacity: 0.85;
+  }
+  .floral-ornament-lg {
+    width: 140px; height: 100px;
+    margin: 0 auto 18px;
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 40%, #fff8f3 0%, var(--cream-deep) 45%, var(--blush) 90%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 14% 22%, rgba(200, 138, 115, 0.12) 0%, transparent 25%),
+      radial-gradient(circle at 86% 78%, rgba(183, 110, 121, 0.12) 0%, transparent 30%),
+      radial-gradient(2px 1.2px at 18% 14%, rgba(165, 90, 90, 0.30), transparent 51%),
+      radial-gradient(1.5px 1px at 78% 22%, rgba(165, 90, 90, 0.25), transparent 51%),
+      radial-gradient(1.8px 1.2px at 30% 36%, rgba(165, 90, 90, 0.22), transparent 51%),
+      radial-gradient(1.4px 1px at 66% 44%, rgba(165, 90, 90, 0.20), transparent 51%),
+      radial-gradient(2px 1.2px at 52% 88%, rgba(165, 90, 90, 0.28), transparent 51%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+  .hero-monogram {
+    width: 90px; height: 90px;
+    margin: 0 auto 16px;
+    color: var(--rose-deep);
+  }
+  .hero-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    padding-left: 8px;
+  }
+  .hero-names {
+    margin: 14px 0 10px;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: clamp(38px, 11vw, 78px);
+    color: var(--wine);
+    letter-spacing: 4px;
+    line-height: 0.95;
+    text-transform: uppercase;
+    padding-left: 4px;
+  }
+  .hero-and {
+    display: block;
+    font-family: 'Italianno', cursive;
+    font-weight: 400;
+    font-size: clamp(40px, 11vw, 64px);
+    color: var(--rose-deep);
+    letter-spacing: 0;
+    margin: -4px 0;
+    text-transform: none;
+    line-height: 1;
+  }
+  .hero-tagline {
+    margin-top: 18px;
+    font-family: 'Italianno', cursive;
+    font-size: clamp(32px, 8vw, 48px);
+    color: var(--rose-deep);
+    line-height: 1;
+  }
+  .hero-date {
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(11px, 3vw, 13px);
+    color: var(--rose-deep);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    padding-left: 6px;
+  }
+
+  /* ============== countdown ============== */
+  .countdown {
+    margin: 32px auto 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 480px;
+  }
+  .countdown-cell {
+    background: rgba(255, 248, 243, 0.6);
+    border: 1px solid var(--rose);
+    padding: 12px 6px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(28px, 8vw, 38px);
+    color: var(--wine);
+    line-height: 1;
+  }
+  .countdown-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    margin-top: 6px;
+    padding-left: 3px;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-family: 'Italianno', cursive;
+    font-size: 20px;
+    color: var(--rose-deep);
+    opacity: 0.85;
+    animation: drift 2.5s ease-in-out infinite;
+  }
+  .scroll-cue::after {
+    content: '';
+    display: block;
+    width: 1px; height: 26px;
+    background: linear-gradient(to bottom, var(--rose-deep), transparent);
+    margin: 6px auto 0;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(-50%, 0); opacity: 0.85; }
+    50%      { transform: translate(-50%, 6px); opacity: 1; }
+  }
+
+  /* ============================================================
+     PHOTO FRAMES (placeholders)
+     ============================================================ */
+  .photo-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;        /* portrait, ideal for mobile photos */
+    background:
+      linear-gradient(135deg, var(--cream-deep) 0%, var(--blush) 100%);
+    border: 1px solid var(--rose);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute; inset: 4px;
+    border: 0.5px solid var(--gold);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .photo-frame::after {
+    content: attr(data-label);
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Italianno', cursive;
+    font-size: clamp(20px, 5vw, 28px);
+    color: var(--rose-deep);
+    text-align: center;
+    padding: 10%;
+    z-index: 0;
+    opacity: 0.8;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(200, 138, 115, 0.12), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(183, 110, 121, 0.15), transparent 60%);
+  }
+  .photo-frame img {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .photo-frame.landscape { aspect-ratio: 4 / 3; }
+  .photo-frame.banner    { aspect-ratio: 3 / 2; }
+  .photo-frame.square    { aspect-ratio: 1 / 1; }
+
+  /* feature photo with caption */
+  .feature-photo {
+    margin: 36px auto 0;
+    max-width: 460px;
+  }
+  .feature-photo .photo-frame { aspect-ratio: 4 / 5; }
+  .photo-caption {
+    margin-top: 14px;
+    text-align: center;
+    font-family: 'Italianno', cursive;
+    font-size: 24px;
+    color: var(--rose-deep);
+  }
+
+  /* ============================================================
+     GALLERY
+     ============================================================ */
+  .gallery {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .gallery .photo-frame { aspect-ratio: 4 / 5; }
+  .gallery .full { grid-column: span 2; aspect-ratio: 3 / 2; }
+  @media (min-width: 700px) {
+    .gallery { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gallery .full { grid-column: span 3; aspect-ratio: 16 / 9; }
+  }
+
+  /* ============================================================
+     DYNAMIC CARDS
+     ============================================================ */
+  .cards {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 700px) { .cards { grid-template-columns: 1fr 1fr; } }
+  .card {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--rose);
+    padding: 22px 22px 24px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute; inset: 4px;
+    border: 0.5px solid var(--gold);
+    pointer-events: none;
+  }
+  .card-icon {
+    width: 36px; height: 36px;
+    margin: 0 auto 10px;
+    color: var(--rose-deep);
+  }
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+  .card-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--soft-ink);
+  }
+
+  /* ============================================================
+     QUOTE BLOCKS (His/Her words)
+     ============================================================ */
+  .quote-block {
+    margin: 32px auto 0;
+    max-width: 600px;
+    text-align: center;
+  }
+  .quote-block .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    line-height: 0.5;
+    color: var(--gold);
+    opacity: 0.6;
+    height: 32px;
+  }
+  .quote-block blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(18px, 5vw, 24px);
+    line-height: 1.5;
+    color: var(--wine);
+    margin: 6px 0 14px;
+  }
+  .quote-block cite {
+    font-family: 'Italianno', cursive;
+    font-style: normal;
+    font-size: 28px;
+    color: var(--rose-deep);
+  }
+
+  /* ============================================================
+     LOVE LANGUAGES (3 columns on desktop, stacked mobile)
+     ============================================================ */
+  .languages {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 720px) { .languages { grid-template-columns: 1fr 1fr 1fr; } }
+  .lang-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--rose);
+    padding: 28px 22px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .lang-card::before {
+    content: '';
+    position: absolute; inset: 5px;
+    border: 0.5px solid var(--gold);
+    pointer-events: none;
+  }
+  .lang-icon {
+    width: 44px; height: 44px;
+    margin: 0 auto 12px;
+    color: var(--rose-deep);
+  }
+  .lang-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin-bottom: 14px;
+    padding-left: 4px;
+  }
+  .lang-list {
+    list-style: none;
+    text-align: center;
+  }
+  .lang-list li {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--soft-ink);
+    line-height: 2;
+  }
+
+  /* ============================================================
+     VISION LIST (ordinary happiness)
+     ============================================================ */
+  .vision-list {
+    margin: 36px auto 0;
+    max-width: 460px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+  }
+  .vision-list li {
+    list-style: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--soft-ink);
+    text-align: center;
+    padding: 12px 6px;
+    border-top: 1px solid var(--rose);
+    border-bottom: 1px solid var(--rose);
+    position: relative;
+  }
+  .vision-list li::before {
+    content: '\2766';
+    color: var(--rose);
+    margin-right: 6px;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  /* ============================================================
+     FUN FACTS
+     ============================================================ */
+  .facts {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fact {
+    background: rgba(255, 255, 255, 0.55);
+    border-left: 3px solid var(--rose-deep);
+    padding: 14px 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--soft-ink);
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+     SAVE THE DATE
+     ============================================================ */
+  .save-date {
+    margin: 40px auto 0;
+    max-width: 480px;
+    background:
+      linear-gradient(180deg, rgba(255, 248, 243, 0.7) 0%, rgba(248, 212, 203, 0.4) 100%);
+    border: 1.5px solid var(--rose-deep);
+    box-shadow: inset 0 0 0 4px rgba(255, 248, 243, 0.85), inset 0 0 0 4.5px var(--gold);
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+  }
+  .save-date .month {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    padding-left: 8px;
+  }
+  .save-date .day {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(64px, 18vw, 110px);
+    line-height: 1;
+    background: linear-gradient(180deg, #d99a8a 0%, #b76e79 40%, #8b3a5c 80%, #5a1f3a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 6px 0 2px;
+  }
+  .save-date .year {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    letter-spacing: 10px;
+    color: var(--wine);
+    padding-left: 10px;
+  }
+  .save-date .venue {
+    margin-top: 18px;
+    font-family: 'Italianno', cursive;
+    font-size: 30px;
+    color: var(--rose-deep);
+    line-height: 1.1;
+  }
+  .save-date .small-meta {
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--soft-ink);
+    text-transform: uppercase;
+    padding-left: 4px;
+  }
+
+  /* ============================================================
+     CLOSING
+     ============================================================ */
+  .closing-quote {
+    margin: 40px auto 0;
+    max-width: 640px;
+    padding: 36px 24px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--gold);
+    box-shadow: inset 0 0 0 3px rgba(74, 22, 42, 0.6), inset 0 0 0 3.5px var(--gold);
+    text-align: center;
+  }
+  .closing-quote .text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(18px, 5vw, 24px);
+    color: #fde0d2;
+    line-height: 1.55;
+  }
+  .closing-quote .sig {
+    margin-top: 20px;
+    font-family: 'Italianno', cursive;
+    font-size: 32px;
+    color: var(--gold-light);
+  }
+
+  footer {
+    padding: 40px 24px;
+    text-align: center;
+    background: var(--wine-deep);
+    color: #fde0d2;
+  }
+  footer .names {
+    font-family: 'Italianno', cursive;
+    font-size: 36px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  footer .made-with {
+    margin-top: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(253, 224, 210, 0.55);
+    text-transform: uppercase;
+    padding-left: 4px;
+  }
+  footer .heart-big { color: var(--heart); }
+
+  /* ============================================================
+     FLOATING PETALS (decorative, only on capable devices)
+     ============================================================ */
+  .petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 65% 35% 65% 35%;
+    background: radial-gradient(circle at 30% 30%, #fff0e8, #f5b8b0 60%, #c98a73);
+    opacity: 0.65;
+    top: -20px;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translate(0, -20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    100% { transform: translate(var(--drift, 40px), 110vh) rotate(720deg); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .petals { display: none; } }
+
+  /* ============================================================
+     MOBILE TUNING
+     ============================================================ */
+  @media (max-width: 480px) {
+    section { padding: 72px 0; }
+    .container { padding: 0 20px; }
+    .countdown { gap: 6px; }
+    .countdown-cell { padding: 10px 4px; }
+    .countdown-label { font-size: 8px; letter-spacing: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== floating petals ============== -->
+<div class="petals" aria-hidden="true" id="petals"></div>
+
+<!-- ============== reusable SVG defs ============== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="rose-flourish" viewBox="0 0 100 60">
+      <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
+        <path d="M5 30 Q 20 22, 36 30"/>
+        <path d="M64 30 Q 80 38, 95 30"/>
+        <path d="M38 30 Q 42 26, 46 30"/>
+        <path d="M54 30 Q 58 34, 62 30"/>
+      </g>
+      <g transform="translate(50 30)">
+        <circle r="6" fill="currentColor" opacity="0.85"/>
+        <circle r="3" fill="#fff" opacity="0.4"/>
+      </g>
+      <g fill="currentColor" opacity="0.6">
+        <ellipse cx="20" cy="26" rx="3" ry="1.2" transform="rotate(-15 20 26)"/>
+        <ellipse cx="80" cy="34" rx="3" ry="1.2" transform="rotate(15 80 34)"/>
+      </g>
+    </symbol>
+
+    <symbol id="rose-flourish-lg" viewBox="0 0 200 100">
+      <g fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+        <path d="M5 50 Q 40 40, 76 50"/>
+        <path d="M124 50 Q 160 60, 195 50"/>
+        <path d="M80 50 Q 86 44, 92 50"/>
+        <path d="M108 50 Q 114 56, 120 50"/>
+      </g>
+      <!-- center rose -->
+      <g transform="translate(100 50)">
+        <circle r="10" fill="currentColor" opacity="0.85"/>
+        <circle r="5" fill="#fff" opacity="0.35"/>
+      </g>
+      <!-- sage leaves -->
+      <g fill="#7a8b6f" opacity="0.85">
+        <path d="M86 50 Q 92 44, 96 50 Q 92 54, 86 50 Z"/>
+        <path d="M114 50 Q 108 44, 104 50 Q 108 54, 114 50 Z"/>
+      </g>
+      <!-- buds -->
+      <g fill="currentColor" opacity="0.7">
+        <ellipse cx="40" cy="44" rx="3.5" ry="2" transform="rotate(-15 40 44)"/>
+        <ellipse cx="160" cy="56" rx="3.5" ry="2" transform="rotate(15 160 56)"/>
+        <ellipse cx="60" cy="48" rx="2.5" ry="1.4" transform="rotate(-10 60 48)"/>
+        <ellipse cx="140" cy="52" rx="2.5" ry="1.4" transform="rotate(10 140 52)"/>
+      </g>
+      <!-- pearls -->
+      <g fill="#d4a017" opacity="0.7">
+        <circle cx="40" cy="44" r="0.9"/>
+        <circle cx="160" cy="56" r="0.9"/>
+      </g>
+    </symbol>
+
+    <symbol id="heart-rose-crest" viewBox="0 0 100 100">
+      <g>
+        <!-- rose garland -->
+        <path d="M20 50 Q 28 78, 50 84 Q 72 78, 80 50"
+              fill="none" stroke="#7a8b6f" stroke-width="0.7" stroke-linecap="round"/>
+        <g fill="#7a8b6f">
+          <path d="M22 54 Q 26 50, 30 54 Q 26 58, 22 54 Z"/>
+          <path d="M70 54 Q 74 50, 78 54 Q 74 58, 70 54 Z"/>
+          <path d="M30 70 Q 34 66, 38 72 Q 34 75, 30 70 Z"/>
+          <path d="M70 70 Q 66 66, 62 72 Q 66 75, 70 70 Z"/>
+        </g>
+        <g fill="#b76e79" stroke="#5a1f3a" stroke-width="0.3">
+          <circle cx="26" cy="58" r="2.5"/>
+          <circle cx="44" cy="80" r="2.6"/>
+          <circle cx="56" cy="80" r="2.6"/>
+          <circle cx="74" cy="58" r="2.5"/>
+          <circle cx="33" cy="68" r="1.8" fill="#c98a73"/>
+          <circle cx="67" cy="68" r="1.8" fill="#c98a73"/>
+        </g>
+        <!-- heart -->
+        <path d="M50 36 C 46 30, 38 30, 38 38 C 38 46, 50 56, 50 56 C 50 56, 62 46, 62 38 C 62 30, 54 30, 50 36 Z"
+              fill="#b76e79" stroke="#5a1f3a" stroke-width="0.5"/>
+        <path d="M44 36 Q 46 34, 48 36" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.6"/>
+        <!-- top sprig -->
+        <g fill="#d4a017">
+          <circle cx="50" cy="16" r="2"/>
+          <circle cx="44" cy="22" r="1.4"/>
+          <circle cx="56" cy="22" r="1.4"/>
+        </g>
+        <path d="M50 18 L 50 28" stroke="#7a8b6f" stroke-width="0.5" fill="none"/>
+        <!-- initials banner -->
+        <g fill="#c98a73" stroke="#5a1f3a" stroke-width="0.25">
+          <path d="M22 90 Q 18 94, 22 96 L 78 96 Q 82 94, 78 90 Z"/>
+        </g>
+        <text x="50" y="94.5" font-family="Cinzel" font-weight="700" font-size="4"
+              text-anchor="middle" fill="#fef7f3">R &amp; D</text>
+      </g>
+    </symbol>
+
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M12 21s-7-4.5-9.5-9C0.7 8.4 2 4 6 4c2 0 3.5 1 4 2.5C10.5 5 12 4 14 4c4 0 5.3 4.4 3.5 8-2.5 4.5-5.5 9-5.5 9z"
+            fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-hand" viewBox="0 0 24 24">
+      <path d="M8 2c0 4 2 4 2 8H6c0 4 2 7 6 7s6-3 6-7c0-3-2-5-4-5-1 0-2 .5-2 1.5C12 6 11 6 11 4c0-1-1-2-3-2z"
+            fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24">
+      <path d="M12 2 L13 10 L21 11 L13 13 L12 22 L11 13 L3 11 L11 10 Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3 11 L12 3 L21 11 V21 H14 V14 H10 V21 H3 Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-talk" viewBox="0 0 24 24">
+      <path d="M3 5 H21 V17 H7 L3 21 Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-ring" viewBox="0 0 24 24">
+      <circle cx="12" cy="15" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M9 7 L12 3 L15 7 Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="hero-content reveal reveal-scale">
+    <svg class="hero-monogram" viewBox="0 0 100 100"><use href="#heart-rose-crest"/></svg>
+    <div class="hero-tag">A Royal Wedding</div>
+    <h1 class="hero-names">
+      Rinky
+      <span class="hero-and">&amp;</span>
+      Deepak
+    </h1>
+    <div class="hero-tagline">Two hearts. One home. Forever.</div>
+    <div class="hero-date">28 &middot; 29 &nbsp; June &nbsp; 2026</div>
+
+    <div class="countdown" id="countdown" aria-label="Countdown to the wedding">
+      <div class="countdown-cell"><div class="countdown-num" id="cd-days">--</div><div class="countdown-label">Days</div></div>
+      <div class="countdown-cell"><div class="countdown-num" id="cd-hrs">--</div><div class="countdown-label">Hours</div></div>
+      <div class="countdown-cell"><div class="countdown-num" id="cd-min">--</div><div class="countdown-label">Min</div></div>
+      <div class="countdown-cell"><div class="countdown-num" id="cd-sec">--</div><div class="countdown-label">Sec</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">our story below</div>
+</header>
+
+<!-- ============================================================
+     OUR STORY
+     ============================================================ -->
+<section class="bg-cream">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">Chapter One</div>
+    <h2 class="reveal">Our Story</h2>
+    <div class="script reveal">how we became home</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="body-text reveal">
+      <p>
+        Riu (<em>Rinky</em>) and Diu (<em>Deepak</em>) are not just a couple preparing for marriage. They are best friends. Soulmates. Partners. Each other&rsquo;s safest place in the world.
+      </p>
+      <p>
+        Our story isn&rsquo;t built on grand gestures alone. It is built on <em>thousands of conversations</em>, endless understanding, emotional vulnerability, deep trust &mdash; and a love that grew stronger every single day.
+      </p>
+      <p>
+        The wedding is happening in June 2026. But in many ways&hellip; we already feel married.
+      </p>
+    </div>
+
+    <div class="feature-photo reveal reveal-scale">
+      <div class="photo-frame" data-label="Riu &amp; Diu — together">
+        <img src="images/photo-hero.jpg" alt="Riu &amp; Diu together" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-caption">~ the two of us ~</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OUR DYNAMIC
+     ============================================================ -->
+<section class="bg-blush">
+  <div class="container">
+    <svg class="floral-ornament-lg reveal" viewBox="0 0 200 100"><use href="#rose-flourish-lg"/></svg>
+    <div class="eyebrow reveal">The Many Forms of Us</div>
+    <h2 class="reveal">Our Dynamic</h2>
+    <div class="script reveal">a love with many faces</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="body-text reveal">
+      <p>One of the most unique things about us is how many forms our love takes.</p>
+    </div>
+
+    <div class="cards stagger reveal">
+      <div class="card reveal">
+        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-heart"/></svg>
+        <div class="card-title">Lovers</div>
+        <div class="card-text">Soft, devoted, romantic &mdash; tender even in the smallest of moments.</div>
+      </div>
+      <div class="card reveal">
+        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-talk"/></svg>
+        <div class="card-title">Best Friends</div>
+        <div class="card-text">The kind who can talk about anything &mdash; or nothing &mdash; for hours.</div>
+      </div>
+      <div class="card reveal">
+        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-spark"/></svg>
+        <div class="card-title">Each Other&rsquo;s Biggest Supporters</div>
+        <div class="card-text">Cheering, believing, defending &mdash; every single day, in every single room.</div>
+      </div>
+      <div class="card reveal">
+        <svg class="card-icon" viewBox="0 0 24 24"><use href="#icon-hand"/></svg>
+        <div class="card-title">Protector &amp; Protected</div>
+        <div class="card-text">Deepak lovingly cares for Rinky like she&rsquo;s the most precious thing in the world &mdash; because she is.</div>
+      </div>
+    </div>
+
+    <div class="quote-block reveal">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote>I don&rsquo;t want to fix you. I just want to make life softer for you.</blockquote>
+      <cite>&mdash; Deepak</cite>
+    </div>
+    <div class="quote-block reveal">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote>I didn&rsquo;t have you back then. You are literally my strength now.</blockquote>
+      <cite>&mdash; Rinky</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHAT MAKES OUR LOVE UNIQUE
+     ============================================================ -->
+<section class="bg-cream">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">What Makes Us, Us</div>
+    <h2 class="reveal">We Never Stop Talking</h2>
+    <div class="script reveal">communication, always</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="body-text reveal">
+      <p>We have an unusual level of openness. We talk about everything.</p>
+      <p><em>The beautiful things. The difficult things. The uncomfortable things. The fears. The insecurities. The dreams. The future.</em></p>
+      <p>Even when conflicts happen, communication always wins. Our goal is never to win arguments &mdash; our goal is to understand each other.</p>
+    </div>
+
+    <div class="quote-block reveal">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote>No matter what happens, we never stop talking.</blockquote>
+      <cite>&mdash; our promise</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section class="bg-blush">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">Moments of Us</div>
+    <h2 class="reveal">Through the Days</h2>
+    <div class="script reveal">a thousand little forevers</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="gallery stagger reveal">
+      <div class="photo-frame reveal" data-label="First photo together">
+        <img src="images/photo-1.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-frame reveal" data-label="That smile">
+        <img src="images/photo-2.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-frame reveal full" data-label="A whole afternoon, just us">
+        <img src="images/photo-3.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-frame reveal" data-label="Late-night calls became this">
+        <img src="images/photo-4.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-frame reveal" data-label="Found home in you">
+        <img src="images/photo-5.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-frame reveal" data-label="A future together">
+        <img src="images/photo-6.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HE SAYS / SHE SAYS
+     ============================================================ -->
+<section class="bg-cream">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">In His Words</div>
+    <h2 class="reveal">How He Sees Her</h2>
+    <div class="script reveal">beauty took human form</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="feature-photo reveal reveal-left">
+      <div class="photo-frame square" data-label="Rinky">
+        <img src="images/portrait-rinky.jpg" alt="Rinky" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-caption">~ Rinky ~</div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>
+        Deepak genuinely believes Rinky is one of the kindest human beings he has ever met. He sees her as <em>gentle, compassionate, loving, loyal, emotionally strong &mdash; beautiful inside and out.</em>
+      </p>
+      <p>
+        But what he admires most is not her appearance. It is her <em>heart.</em> He believes she remained kind despite life giving her every reason not to be.
+      </p>
+    </div>
+
+    <div class="quote-block reveal">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote>Beauty must have taken human form.</blockquote>
+      <cite>&mdash; Deepak, about Rinky</cite>
+    </div>
+    <div class="quote-block reveal">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote>You deserved gentleness all along.</blockquote>
+      <cite>&mdash; Deepak, to Rinky</cite>
+    </div>
+  </div>
+</section>
+
+<section class="bg-blush">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">In Her Words</div>
+    <h2 class="reveal">How She Sees Him</h2>
+    <div class="script reveal">he is my home</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="feature-photo reveal reveal-right">
+      <div class="photo-frame square" data-label="Deepak">
+        <img src="images/portrait-deepak.jpg" alt="Deepak" onerror="this.style.display='none'"/>
+      </div>
+      <div class="photo-caption">~ Deepak ~</div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>
+        Rinky sees Deepak as her <em>home.</em> Her strength. Her protector. Her safest place. Someone who loves her without conditions. Someone who accepts her entirely.
+      </p>
+      <p>
+        She knows his love is <em>fierce, loyal, protective, and unwavering.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOVE LANGUAGES
+     ============================================================ -->
+<section class="bg-cream">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">How We Love</div>
+    <h2 class="reveal">Our Love Languages</h2>
+    <div class="script reveal">three ways our hearts speak</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="languages stagger reveal">
+      <div class="lang-card reveal">
+        <svg class="lang-icon" viewBox="0 0 24 24"><use href="#icon-heart"/></svg>
+        <div class="lang-title">Emotional Presence</div>
+        <ul class="lang-list">
+          <li>Being there.</li>
+          <li>Listening.</li>
+          <li>Understanding.</li>
+          <li>Supporting.</li>
+          <li>Comforting.</li>
+        </ul>
+      </div>
+      <div class="lang-card reveal">
+        <svg class="lang-icon" viewBox="0 0 24 24"><use href="#icon-hand"/></svg>
+        <div class="lang-title">Physical Affection</div>
+        <ul class="lang-list">
+          <li>Holding hands.</li>
+          <li>Cuddles.</li>
+          <li>Hugs.</li>
+          <li>Playfulness.</li>
+          <li>Feeling close.</li>
+        </ul>
+      </div>
+      <div class="lang-card reveal">
+        <svg class="lang-icon" viewBox="0 0 24 24"><use href="#icon-talk"/></svg>
+        <div class="lang-title">Words</div>
+        <ul class="lang-list">
+          <li>Long emotional letters.</li>
+          <li>Thoughtful messages.</li>
+          <li>Daily affirmations.</li>
+          <li>Expressions of gratitude.</li>
+          <li>Deep conversations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OUR VISION OF MARRIAGE
+     ============================================================ -->
+<section class="bg-blush">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">What We Dream Of</div>
+    <h2 class="reveal">Ordinary Happiness</h2>
+    <div class="script reveal">the small things, forever</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="body-text reveal">
+      <p>For us, marriage is not a finish line. It is the beginning of <em>peace.</em></p>
+      <p>Neither of us dreams of perfection. We dream of <em>ordinary happiness.</em></p>
+    </div>
+
+    <ul class="vision-list stagger reveal">
+      <li class="reveal">Morning tea together</li>
+      <li class="reveal">Grocery shopping</li>
+      <li class="reveal">Movie nights</li>
+      <li class="reveal">Weekend walks</li>
+      <li class="reveal">Building a home</li>
+      <li class="reveal">Cooking together</li>
+      <li class="reveal">Raising children</li>
+      <li class="reveal">Growing old together</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     FUN FACTS
+     ============================================================ -->
+<section class="bg-cream">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">Little Things About Us</div>
+    <h2 class="reveal">Fun Facts</h2>
+    <div class="script reveal">the smaller truths</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="facts stagger reveal">
+      <div class="fact reveal">Our nicknames are <em>Riu &amp; Diu</em>.</div>
+      <div class="fact reveal">We text constantly &mdash; from the most mundane to the most meaningful.</div>
+      <div class="fact reveal">Deepak writes emotional countdown letters leading up to the wedding.</div>
+      <div class="fact reveal">We are both deeply sentimental and unapologetically hopeless romantics.</div>
+      <div class="fact reveal">We believe love is shown in everyday actions, not just grand gestures.</div>
+      <div class="fact reveal">Both of us believe we are unbelievably lucky to have found each other.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SAVE THE DATE
+     ============================================================ -->
+<section class="bg-rose">
+  <div class="container">
+    <svg class="floral-ornament-lg reveal" viewBox="0 0 200 100"><use href="#rose-flourish-lg"/></svg>
+    <div class="eyebrow reveal">Save The Date</div>
+    <h2 class="reveal">The Day We Begin</h2>
+    <div class="script reveal">our forever starts here</div>
+
+    <div class="save-date reveal reveal-scale">
+      <div class="month">June</div>
+      <div class="day">28 <span style="font-size: 0.4em;">&middot;</span> 29</div>
+      <div class="year">2 0 2 6</div>
+      <div class="venue">Save the date</div>
+      <div class="small-meta">More details to follow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLOSING / DARK
+     ============================================================ -->
+<section class="bg-deep">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60" style="color:#d4a017"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">In One Sentence</div>
+    <h2 class="reveal">Home</h2>
+    <div class="script-deep reveal" style="color:#e8c97a;">we found it in each other</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="closing-quote reveal reveal-scale">
+      <p class="text">
+        After everything life taught them separately, they found peace, safety, friendship, and forever in each other. <span class="heart">&hearts;</span>
+      </p>
+      <div class="sig">Riu &amp; Diu</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="names">Rinky &amp; Deepak</div>
+  <div class="made-with">Made with <span class="heart-big">&hearts;</span> &middot; June 2026</div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+  // -------- Countdown to wedding (June 28, 2026 at 00:00 local) --------
+  (function () {
+    var target = new Date('2026-06-28T00:00:00').getTime();
+    var $d = document.getElementById('cd-days');
+    var $h = document.getElementById('cd-hrs');
+    var $m = document.getElementById('cd-min');
+    var $s = document.getElementById('cd-sec');
+
+    function tick() {
+      var now = Date.now();
+      var diff = Math.max(0, target - now);
+      var days = Math.floor(diff / 86400000);
+      var hrs  = Math.floor((diff % 86400000) / 3600000);
+      var min  = Math.floor((diff % 3600000) / 60000);
+      var sec  = Math.floor((diff % 60000) / 1000);
+      $d.textContent = String(days).padStart(2, '0');
+      $h.textContent = String(hrs).padStart(2, '0');
+      $m.textContent = String(min).padStart(2, '0');
+      $s.textContent = String(sec).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // -------- Scroll reveal via IntersectionObserver --------
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+
+  // -------- Floating petals --------
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var host = document.getElementById('petals');
+    if (!host) return;
+    var count = window.innerWidth < 600 ? 10 : 18;
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement('span');
+      p.className = 'petal';
+      var size = 8 + Math.random() * 14;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.animationDuration = (12 + Math.random() * 16) + 's';
+      p.style.animationDelay = (-Math.random() * 20) + 's';
+      p.style.setProperty('--drift', ((Math.random() * 200 - 100) | 0) + 'px');
+      p.style.opacity = (0.4 + Math.random() * 0.4).toFixed(2);
+      host.appendChild(p);
+    }
+  })();
+</script>
+
+</body>
+</html>
