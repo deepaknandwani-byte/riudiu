@@ -952,7 +952,7 @@
 <!-- ============================================================
      BACKGROUND MUSIC
      ============================================================ -->
-<audio id="bgMusic" loop preload="auto" playsinline>
+<audio id="bgMusic" loop autoplay muted preload="auto" playsinline>
   <source src="audio/ordinary.mp3" type="audio/mpeg">
 </audio>
 
@@ -1509,7 +1509,7 @@
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   })();
 
-  // -------- Background music with smart autoplay fallback --------
+  // -------- Background music: muted autoplay → unmute on first interaction --------
   (function () {
     var audio = document.getElementById('bgMusic');
     var btn = document.getElementById('musicToggle');
@@ -1517,71 +1517,69 @@
     var iconOff = document.getElementById('musicIconOff');
     if (!audio || !btn) return;
 
-    audio.volume = 0.5;
+    audio.volume = 0.6;
 
-    function setIcon(playing) {
-      if (playing) {
-        iconOn.style.display = 'block';
+    function setIcon(audible) {
+      if (audible) {
+        iconOn.style.display  = 'block';
         iconOff.style.display = 'none';
         btn.classList.remove('muted');
       } else {
-        iconOn.style.display = 'none';
+        iconOn.style.display  = 'none';
         iconOff.style.display = 'block';
         btn.classList.add('muted');
       }
     }
 
-    function tryPlay() {
+    setIcon(false);                      // start showing the muted icon
+    btn.classList.add('needs-attention'); // pulse to invite tap
+
+    // make sure muted-autoplay is actually rolling (it almost always is — HTML
+    // attribute handles it — but kick it just in case)
+    var p = audio.play();
+    if (p && typeof p.catch === 'function') p.catch(function () {});
+
+    // Unmute on the very first interaction of any kind
+    function unmuteOnFirstTouch() {
+      audio.muted = false;
+      // if autoplay was outright blocked (rare), this also kicks playback
       var p = audio.play();
-      if (p && typeof p.then === 'function') {
-        return p.then(function () {
-          btn.classList.remove('needs-attention');
-          setIcon(true);
-        });
-      }
+      if (p && typeof p.catch === 'function') p.catch(function () {});
       btn.classList.remove('needs-attention');
       setIcon(true);
-      return Promise.resolve();
+      cleanup();
     }
+    function cleanup() {
+      document.removeEventListener('click',      unmuteOnFirstTouch, true);
+      document.removeEventListener('touchstart', unmuteOnFirstTouch, true);
+      document.removeEventListener('keydown',    unmuteOnFirstTouch, true);
+      document.removeEventListener('scroll',     unmuteOnFirstTouch, true);
+      document.removeEventListener('pointerdown',unmuteOnFirstTouch, true);
+    }
+    var opts = { capture: true, once: true };
+    document.addEventListener('click',       unmuteOnFirstTouch, opts);
+    document.addEventListener('touchstart',  unmuteOnFirstTouch, opts);
+    document.addEventListener('keydown',     unmuteOnFirstTouch, opts);
+    document.addEventListener('pointerdown', unmuteOnFirstTouch, opts);
+    document.addEventListener('scroll', unmuteOnFirstTouch, { capture: true, once: true, passive: true });
 
-    // attempt autoplay on load
-    tryPlay().catch(function () {
-      // browser blocked it — start the pulse and wait for any interaction
-      btn.classList.add('needs-attention');
-      setIcon(false);
-
-      function resumeOnInteraction() {
-        tryPlay().then(function () {
-          cleanup();
-        }).catch(function () { /* still blocked — toggle button works */ });
-      }
-      function cleanup() {
-        document.removeEventListener('click', resumeOnInteraction, true);
-        document.removeEventListener('touchstart', resumeOnInteraction, true);
-        document.removeEventListener('keydown', resumeOnInteraction, true);
-        document.removeEventListener('scroll', resumeOnInteraction, true);
-      }
-      document.addEventListener('click', resumeOnInteraction, { capture: true, once: true });
-      document.addEventListener('touchstart', resumeOnInteraction, { capture: true, once: true });
-      document.addEventListener('keydown', resumeOnInteraction, { capture: true, once: true });
-      document.addEventListener('scroll', resumeOnInteraction, { capture: true, once: true, passive: true });
-    });
-
-    // manual toggle
+    // Manual toggle (mute / unmute — never actually pauses, so it picks up where it left off)
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       btn.classList.remove('needs-attention');
-      if (audio.paused) {
-        tryPlay().catch(function () {});
+      cleanup(); // user explicitly chose, drop the auto-unmute listeners
+      if (audio.muted || audio.paused) {
+        audio.muted = false;
+        var p = audio.play();
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+        setIcon(true);
       } else {
-        audio.pause();
+        audio.muted = true;
         setIcon(false);
       }
     });
 
-    audio.addEventListener('play',  function () { setIcon(true); });
-    audio.addEventListener('pause', function () { setIcon(false); });
-    audio.addEventListener('ended', function () { setIcon(false); });
+    audio.addEventListener('volumechange', function () { setIcon(!audio.muted); });
   })();
 
   // -------- Varmala ceremony game (retro pixel) --------
