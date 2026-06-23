@@ -453,6 +453,70 @@
   }
 
   /* ============================================================
+     INVITATION CARD
+     ============================================================ */
+  .invitation-frame {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: 36px auto 0;
+    aspect-ratio: 1333 / 2000;
+    background: linear-gradient(135deg, var(--plum-mid), var(--purple));
+    border: 1.5px solid var(--gold-bright);
+    box-shadow: var(--shadow-lift);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .invitation-frame::before {
+    content: '';
+    position: absolute; inset: 5px;
+    border: 0.5px solid var(--gold);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .invitation-frame img {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .invitation-actions {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .invitation-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px 12px 26px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold-pale);
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .invitation-link:hover, .invitation-link:focus-visible {
+    background: var(--gold-bright);
+    color: var(--deep);
+    border-color: var(--gold-bright);
+  }
+  .invitation-link svg {
+    width: 14px; height: 14px;
+    stroke-width: 2;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ============================================================
      CLOSING
      ============================================================ */
   .closing-quote {
@@ -791,6 +855,34 @@
       <div class="year">2 0 2 6</div>
       <div class="venue">Save the date</div>
       <div class="small-meta">More details to follow</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INVITATION
+     ============================================================ -->
+<section class="bg-plum">
+  <div class="container">
+    <svg class="floral-ornament reveal" viewBox="0 0 100 60"><use href="#rose-flourish"/></svg>
+    <div class="eyebrow reveal">The Invitation</div>
+    <h2 class="reveal">You Are Invited</h2>
+    <div class="script reveal">with love, from us</div>
+    <div class="divider reveal"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+    <div class="invitation-frame reveal reveal-scale">
+      <img src="images/invitation.jpg" alt="Wedding invitation — Deepak weds Rinky" />
+    </div>
+
+    <div class="invitation-actions reveal">
+      <a class="invitation-link" href="images/wedding-invitation.pdf" target="_blank" rel="noopener" download>
+        <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+        Download Invitation
+      </a>
+      <a class="invitation-link" href="images/wedding-invitation.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        View Full Quality
+      </a>
     </div>
   </div>
 </section>
