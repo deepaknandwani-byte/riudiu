@@ -365,11 +365,13 @@
   }
   .photo-frame img {
     position: absolute;
-    top: 0; left: 0;
+    top: 0; right: 0; bottom: 0; left: 0;   /* fill the padding box on every browser */
     width: 100%; height: 100%;
+    max-width: 100%; max-height: 100%;
     object-fit: cover;
     z-index: 1;
     display: block;
+    background: transparent;
   }
   .photo-frame.landscape { padding-bottom: 75%; }   /* 4:3 */
   .photo-frame.banner    { padding-bottom: 66.67%; } /* 3:2 */
@@ -1293,7 +1295,7 @@
 
     <div class="feature-photo reveal reveal-scale">
       <div class="photo-frame" data-label="Riu &amp; Diu">
-        <img src="images/photo-hero.jpg" alt="Riu &amp; Diu" onerror="this.style.display='none'"/>
+        <img src="images/photo-hero.jpg" alt="Riu &amp; Diu" loading="lazy"/>
       </div>
       <div class="photo-caption">~ Riu &amp; Diu ~</div>
     </div>
@@ -1313,22 +1315,22 @@
 
     <div class="gallery stagger reveal">
       <div class="photo-frame reveal" data-label="us">
-        <img src="images/photo-1.jpg" alt="" onerror="this.style.display='none'"/>
+        <img src="images/photo-1.jpg" alt="" loading="lazy"/>
       </div>
       <div class="photo-frame reveal" data-label="together">
-        <img src="images/photo-2.jpg" alt="" onerror="this.style.display='none'"/>
+        <img src="images/photo-2.jpg" alt="" loading="lazy"/>
       </div>
       <div class="photo-frame reveal" data-label="a quiet afternoon">
-        <img src="images/photo-3.jpg" alt="" onerror="this.style.display='none'"/>
+        <img src="images/photo-3.jpg" alt="" loading="lazy"/>
       </div>
       <div class="photo-frame reveal" data-label="love">
-        <img src="images/photo-4.jpg" alt="" onerror="this.style.display='none'"/>
+        <img src="images/photo-4.jpg" alt="" loading="lazy"/>
       </div>
       <div class="photo-frame reveal" data-label="always">
-        <img src="images/photo-5.jpg" alt="" onerror="this.style.display='none'"/>
+        <img src="images/photo-5.jpg" alt="" loading="lazy"/>
       </div>
       <div class="photo-frame reveal" data-label="forever">
-        <img src="images/photo-6.jpg" alt="" onerror="this.style.display='none'"/>
+        <img src="images/photo-6.jpg" alt="" loading="lazy"/>
       </div>
     </div>
   </div>
